@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cu0j5f2y0wcxq"]
+
+[ext_resource type="PackedScene" uid="uid://1wifdxmftf33" path="res://Spaceship.tscn" id="1_c6gwx"]
+[ext_resource type="Texture2D" uid="uid://bdi27520erlvg" path="res://Assets/starfield.jpg" id="2_2dftf"]
+[ext_resource type="PackedScene" uid="uid://dp73xspwnjlq4" path="res://Planet.tscn" id="3_js7pq"]
+[ext_resource type="Texture2D" uid="uid://dm3kela7v4lsf" path="res://Assets/planet.png" id="4_eu7l1"]
+
+[node name="World" type="Node2D"]
+
+[node name="SpaceShip" parent="." instance=ExtResource("1_c6gwx")]
+position = Vector2(552, 254)
+ROTATION = 3.0
+WEIGHT = 0.02
+
+[node name="Starfield" type="ParallaxBackground" parent="."]
+
+[node name="StartLayer" type="ParallaxLayer" parent="Starfield"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Starfield/StartLayer"]
+position = Vector2(552, 335)
+scale = Vector2(0.204083, 0.204083)
+texture = ExtResource("2_2dftf")
+
+[node name="Planet" parent="." instance=ExtResource("3_js7pq")]
+position = Vector2(860, 246)
+TEXTURE = ExtResource("4_eu7l1")

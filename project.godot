@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="GameJam2"
+run/main_scene="res://World.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[physics]
+
+2d/default_gravity=0.0
 
 [rendering]
 
