@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://ble0en3an7434"]
+
+[ext_resource type="Script" uid="uid://bky6ng0nv1l1y" path="res://spaceship.gd" id="1_y3uy0"]
+[ext_resource type="Texture2D" uid="uid://4wuuuq3lf2vb" path="res://image-removebg-preview.png" id="2_7g3nn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmkdn"]
+size = Vector2(45, 40)
+
+[node name="Spaceship" type="RigidBody2D"]
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_y3uy0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5, 0)
+shape = SubResource("RectangleShape2D_pmkdn")
+
+[node name="Image-removebg-preview" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.152, 0.152)
+texture = ExtResource("2_7g3nn")
+
+[node name="Camera2D" type="Camera2D" parent="."]

@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci27c1ie520gm"]
+
+[ext_resource type="PackedScene" uid="uid://blctv81qx0urh" path="res://planet.tscn" id="1_vonw3"]
+[ext_resource type="PackedScene" uid="uid://ble0en3an7434" path="res://spaceship.tscn" id="2_oi3di"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Planet" parent="." instance=ExtResource("1_vonw3")]
+position = Vector2(322, 280)
+
+[node name="Spaceship" parent="." instance=ExtResource("2_oi3di")]
+position = Vector2(490, 274)
+
+[node name="Planet2" parent="." instance=ExtResource("1_vonw3")]
+position = Vector2(880, 422)
+
+[node name="Planet3" parent="." instance=ExtResource("1_vonw3")]
+position = Vector2(724, -72)
+
+[node name="Planet3" parent="Planet3" instance=ExtResource("1_vonw3")]
+position = Vector2(850, -259)
+
+[node name="Planet3" parent="Planet3/Planet3" instance=ExtResource("1_vonw3")]
+position = Vector2(724, -72)
+
+[node name="Planet3" parent="Planet3/Planet3/Planet3" instance=ExtResource("1_vonw3")]
+position = Vector2(-272, 1237)
+
+[node name="Planet3" parent="Planet3/Planet3/Planet3/Planet3" instance=ExtResource("1_vonw3")]
+position = Vector2(-1581, 605)
+
+[node name="Planet3" parent="Planet3/Planet3/Planet3/Planet3/Planet3" instance=ExtResource("1_vonw3")]
+position = Vector2(-1611, -416)
+
+[node name="Planet3" parent="Planet3/Planet3/Planet3/Planet3/Planet3/Planet3" instance=ExtResource("1_vonw3")]
+position = Vector2(188, -1295)
+
+[node name="Planet3" parent="Planet3/Planet3/Planet3/Planet3/Planet3/Planet3/Planet3" instance=ExtResource("1_vonw3")]
+position = Vector2(1689, -775)
+
+[node name="Planet3" parent="Planet3/Planet3/Planet3/Planet3/Planet3/Planet3/Planet3/Planet3" instance=ExtResource("1_vonw3")]
+position = Vector2(1058, 2997)
+
+[node name="Planet3" parent="Planet3/Planet3/Planet3/Planet3/Planet3/Planet3/Planet3/Planet3/Planet3" instance=ExtResource("1_vonw3")]
+position = Vector2(-2345, 319)
+
+[node name="Planet3" parent="Planet3/Planet3/Planet3/Planet3/Planet3/Planet3/Planet3/Planet3/Planet3/Planet3" instance=ExtResource("1_vonw3")]
+position = Vector2(-49, -3776)
+
+[node name="Planet3" parent="Planet3/Planet3/Planet3/Planet3/Planet3/Planet3/Planet3/Planet3/Planet3/Planet3/Planet3" instance=ExtResource("1_vonw3")]
+position = Vector2(2560, -126)

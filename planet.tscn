@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://blctv81qx0urh"]
+
+[ext_resource type="Script" uid="uid://bmj8uosuu8ihe" path="res://planet.gd" id="1_1odxm"]
+[ext_resource type="Texture2D" uid="uid://0huocitjie5t" path="res://purple-planet-isolated-transparent-background_84443-19177-removebg-preview.png" id="2_mtr83"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a75xc"]
+radius = 126.063
+
+[node name="Planet" type="StaticBody2D" groups=["planets"]]
+script = ExtResource("1_1odxm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.749996, -1.75)
+scale = Vector2(0.597, 0.593)
+texture = ExtResource("2_mtr83")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_a75xc")
