@@ -16,9 +16,10 @@ const SPACESHIP_MASS = 10
 const GRAVITY_CONSTANT: float = 350.0
 const MASS_PER_RADIUS_PIXEL: float = 100.0
 
-var radius: float
+@export var radius: float
 var mass: float
 
+var surface_gravity: Vector2
 
 func _ready():
 	# Initialize random number generator
@@ -29,10 +30,11 @@ func _ready():
 	
 		# Add different rotation speeds and direction
 	rotation_speed = random_number(0.5, 3) * random_direction()
-	
+	rotation_speed = 3
 	
 	# Make the planets different sizes
 	var scale_factor = random_number(0.5 , 3)
+	scale_factor = 3
 	scale *= scale_factor
 	
 	# Change the scale of the children too
@@ -42,8 +44,11 @@ func _ready():
 	# Get the radius for ease of calculations with the spaceship
 	var collision_surface = self.get_node("PlanetSurface") as CollisionShape2D
 	
-	radius = collision_surface.shape.radius * global_scale.x
+	radius = collision_surface.shape.radius * global_scale.x * scale_factor
 	mass = radius * MASS_PER_RADIUS_PIXEL
+	
+	surface_gravity = get_gravity_force(Vector2.ONE)
+	print("Radius, Mass, Grav: \n\t", radius, "\n\t", mass, "\n\t", surface_gravity)
 	
 	# Add this node to the "planets" group when the scene starts.
 	# This allows the spaceship to easily find it without a direct node path.
@@ -66,7 +71,7 @@ func _physics_process(delta):
 		body.apply_central_gravity(get_gravity_force(vector_to_spaceship))
 
 
-func get_gravity_force(vector_to_spaceship: Vector2):
+func get_gravity_force(vector_to_spaceship: Vector2) -> Vector2:
 	var distance_to_spaceship = vector_to_spaceship.length()
 	var direction_to_spaceship = vector_to_spaceship.normalized()
 	

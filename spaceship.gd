@@ -17,13 +17,70 @@ enum States {FLYING, LANDING, LANDED, TAKE_OFF}
 var state: States = States.FLYING
 var landing_states: LandingStates = LandingStates.CLEAN
 
-var landing_distance = 250
-#var landing_rotation_speed = 5.0
+var takeoff_distance = 100
+var takeoff_direction: Vector2
 
 var landed_planet: Node2D = null
 var offset : Transform2D
 
 var old_state = States.FLYING
+
+
+
+func _ready():
+	planets = get_tree().get_nodes_in_group("planets")
+	
+	connect("body_entered", Callable(self, "planet_touchdown"))
+
+
+func _physics_process(delta: float) -> void:
+
+	if state == States.TAKE_OFF and distance_to_closest_planet() > takeoff_distance:
+		state = States.FLYING
+	elif state == States.TAKE_OFF:
+		taking_off(delta)
+	#elif state in [States.FLYING, States.TAKE_OFF]:
+	
+	elif state == States.FLYING:
+		handle_player_input()
+	
+	elif state == States.LANDED:	
+		if Input.is_action_just_pressed("ui_accept"):
+			#handle_take_off()
+			taking_off(delta)
+		else:
+			# Move with the planet
+			global_transform = landed_planet.global_transform * offset
+
+	# For debugging
+	if state != old_state:
+		print("New state:", States.keys()[state])
+		old_state = state
+
+
+func planet_touchdown(body):
+
+	if body.is_in_group("planets") and state != States.TAKE_OFF:
+		var planet = body
+		state = States.LANDED
+		landed_planet = planet
+		
+		# CHECK ORIENTATION
+		var direction = (global_position - planet.global_position).normalized()
+		var dist_to_planet = (planet.global_position - global_position).normalized()
+		var ship_down = -transform.x.normalized()
+	
+		var dot = ship_down.dot(dist_to_planet)
+		if dot > 0.75:
+			print("Proper landing")
+		else:
+			_explode()
+				
+		# Compute angle facing away from center (so ship is "standing up")
+		var angle = direction.angle()
+		rotation = angle
+		offset = planet.global_transform.affine_inverse() * global_transform
+
 
 func _explode() -> void:
 	print("💥 KABOOM!")
@@ -34,60 +91,13 @@ func _explode() -> void:
 	# Optional: stop the entire scene
 	get_tree().paused = true
 
-func _ready():
-	planets = get_tree().get_nodes_in_group("planets")
-	
-	connect("body_entered", Callable(self, "planet_touchdown"))
-
-
-func planet_touchdown(body):
-	# Vector from planet center to ship
-
-	if body.is_in_group("planets"):
-		var planet = body
-		state = States.LANDED
-		landed_planet = planet
-		# CHECK ORIENTATION
-		var direction = (global_position - planet.global_position).normalized()
-		var dist_to_planet = (planet.global_position - global_position).normalized()
-		var ship_down = -transform.x.normalized()
-	
-		var dot = ship_down.dot(dist_to_planet)
-		if dot > 0.75:
-			print("Proper  landing")
-		else:
-			_explode()
-				
-		# Compute angle facing away from center (so ship is "standing up")
-		var angle = direction.angle()
-		rotation = angle
-		offset = planet.global_transform.affine_inverse() * global_transform
-
-
-func _physics_process(delta: float) -> void:
-
-	if state == States.TAKE_OFF and distance_to_closest_planet() > landing_distance:
-		state = States.FLYING
-	elif state in [States.FLYING, States.TAKE_OFF]:
-		handle_player_input()
-	elif state == States.LANDED:
-		# Move with the planet
-		if Input.is_action_just_pressed("ui_accept"):
-			handle_take_off()
-		else:
-			global_transform = landed_planet.global_transform * offset
-		#handle_take_off()
-
-	# For debugging
-	if state != old_state:
-		print("New state:", States.keys()[state])
-		old_state = state
 
 func distance_from_landed_planet():
 	if landed_planet == null:
 		return INF
 	var vector_to_planet = landed_planet.global_position - global_position
 	return vector_to_planet.length()
+
 
 func distance_to_closest_planet():
 	var planet = find_closest_planet()
@@ -116,15 +126,19 @@ func find_closest_planet():
 func short_angle_distance(a, b):
 	return fmod((b - a + PI), TAU) - PI
 
-func handle_take_off():
+
+func taking_off(delta):
 	if Input.is_action_just_pressed("ui_accept") and landed_planet != null:
-		state = States.FLYING
-		#var launch_direction = (global_position - landed_planet.global_position).normalized()
-		var launch_direction = transform.x.normalized()
-		#if launch_direction == Vector2.ZERO:
-			#launch_direction = transform.x.normalized()
-		
-		apply_central_impulse(launch_direction * launch_impulse)
+		state = States.TAKE_OFF
+	
+	var takeoff_direction = transform.x.normalized()
+	var launch_power = 500 + landed_planet.radius * 6.0
+	
+	# Stop the ship from rotating
+	angular_velocity = 0
+	
+	# Apply force
+	apply_central_impulse(takeoff_direction * launch_power * delta)
 
 
 func apply_central_gravity(force: Vector2) -> void:
@@ -137,37 +151,9 @@ func handle_player_input():
 		rotation_direction -= 1
 	if Input.is_action_pressed("ui_right"):
 		rotation_direction += 1
+	
 	angular_velocity = rotation_direction * rotation_velocity
 
 	if Input.is_action_pressed("ui_up"):
-		apply_central_force(transform.x * thrust_force)
-
-#func reposition_for_landing(delta):
-	#var landing_planet = find_closest_planet()
-	#var direction = (global_position - landing_planet.global_position).normalized()
-	#var landing_angle = direction.angle()
-	#
-	#var speed_factor = clamp(linear_velocity.length() / 250, 0.1, 5.0)
-	#var effective_rotation_speed = landing_rotation_speed * speed_factor
-	#
-	#if abs(short_angle_distance(rotation, landing_angle)) < 0.01:
-		#rotation = landing_angle
-	#else:
-		#rotation = lerp_angle(rotation, landing_angle, delta * effective_rotation_speed)
+		apply_central_force(transform.x.normalized() * thrust_force)
 		
-#func apply_gravity_forces():
-	## HERE IS TO CHANGE GRAVITY LOGIC
-	#for planet in planets:
-		#if not is_instance_valid(planet):
-			#continue
-		#
-		#var direction_to_planet = planet.global_position - global_position
-		#var distance_sq = direction_to_planet.length_squared()
-		#
-		#if distance_sq == 0:
-			#continue
-		#
-		#var gravity_magnitude = planet.gravity_strength / distance_sq
-		#var gravity_vector = direction_to_planet.normalized() * gravity_magnitude
-		#
-		#apply_central_force(gravity_vector)
