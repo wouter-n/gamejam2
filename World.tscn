@@ -1,14 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://cu0j5f2y0wcxq"]
+[gd_scene load_steps=10 format=3 uid="uid://cu0j5f2y0wcxq"]
 
 [ext_resource type="PackedScene" uid="uid://1wifdxmftf33" path="res://Spaceship.tscn" id="1_c6gwx"]
 [ext_resource type="Texture2D" uid="uid://bdi27520erlvg" path="res://Assets/starfield.jpg" id="2_2dftf"]
-[ext_resource type="PackedScene" uid="uid://dp73xspwnjlq4" path="res://Planet.tscn" id="3_js7pq"]
+[ext_resource type="PackedScene" uid="uid://yd7ja8dnm8f6" path="res://GravityPoint2D.tscn" id="3_bcbcq"]
+[ext_resource type="Script" uid="uid://b4irt2vb4mr43" path="res://planet.gd" id="3_eu7l1"]
 [ext_resource type="Texture2D" uid="uid://dm3kela7v4lsf" path="res://Assets/planet.png" id="4_eu7l1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eu7l1"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p1v5b"]
+radius = 150.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8g7i6"]
+radius = 25.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wygdx"]
+radius = 300.0
 
 [node name="World" type="Node2D"]
 
 [node name="SpaceShip" parent="." instance=ExtResource("1_c6gwx")]
-position = Vector2(552, 254)
+position = Vector2(-40, 255)
 ROTATION = 3.0
 WEIGHT = 0.02
 
@@ -21,6 +34,45 @@ position = Vector2(552, 335)
 scale = Vector2(0.204083, 0.204083)
 texture = ExtResource("2_2dftf")
 
-[node name="Planet" parent="." instance=ExtResource("3_js7pq")]
-position = Vector2(860, 246)
-TEXTURE = ExtResource("4_eu7l1")
+[node name="Planet" type="AnimatableBody2D" parent="."]
+position = Vector2(316, 229)
+script = ExtResource("3_eu7l1")
+planet_texture = ExtResource("4_eu7l1")
+
+[node name="Sprite2D" type="Sprite2D" parent="Planet"]
+scale = Vector2(0.113375, 0.113375)
+texture = ExtResource("4_eu7l1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Planet"]
+shape = SubResource("CircleShape2D_eu7l1")
+
+[node name="GravityPoint2D" parent="Planet" instance=ExtResource("3_bcbcq")]
+gravity_force = 100.0
+radius = 150.0
+
+[node name="CollisionShape2D" parent="Planet/GravityPoint2D" index="0"]
+shape = SubResource("CircleShape2D_p1v5b")
+
+[node name="Planet2" type="AnimatableBody2D" parent="."]
+position = Vector2(800, 466)
+script = ExtResource("3_eu7l1")
+planet_radius = 25.0
+planet_texture = ExtResource("4_eu7l1")
+
+[node name="Sprite2D" type="Sprite2D" parent="Planet2"]
+scale = Vector2(0.044287, 0.044287)
+texture = ExtResource("4_eu7l1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Planet2"]
+shape = SubResource("CircleShape2D_8g7i6")
+
+[node name="GravityPoint2D" parent="Planet2" instance=ExtResource("3_bcbcq")]
+position = Vector2(2, -2)
+gravity_force = 150.0
+radius = 300.0
+
+[node name="CollisionShape2D" parent="Planet2/GravityPoint2D" index="0"]
+shape = SubResource("CircleShape2D_wygdx")
+
+[editable path="Planet/GravityPoint2D"]
+[editable path="Planet2/GravityPoint2D"]

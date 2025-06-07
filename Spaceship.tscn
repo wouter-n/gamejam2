@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://yowuqea33phc" path="res://Assets/spaceship.png" id="1_p8lcy"]
 [ext_resource type="Script" uid="uid://d3lolpl5shcrh" path="res://spaceship.gd" id="1_q1owq"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q1owq"]
-height = 20.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q1owq"]
+size = Vector2(20, 22)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 motion_mode = 1
@@ -15,10 +15,10 @@ scale = Vector2(0.141375, 0.138456)
 texture = ExtResource("1_p8lcy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_q1owq")
+shape = SubResource("RectangleShape2D_q1owq")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(0.645688, 1.09522)
-zoom = Vector2(3, 3)
+zoom = Vector2(2, 2)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
