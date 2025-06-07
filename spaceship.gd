@@ -4,10 +4,10 @@
 extends RigidBody2D
 
 # --- Player Control Variables ---
-@export var thrust_force: float = 200.0
+@export var thrust_force: float = 500.0
 @export var rotation_velocity: float = 2.0
 @export var braking_dampening: float = 1.0
-@export var launch_impulse: float = 1000
+@export var launch_impulse: float = 300
 
 
 # --- Private Variables ---
@@ -41,7 +41,7 @@ func planet_touchdown(body):
 
 
 func _physics_process(delta: float) -> void:
-	apply_gravity_forces()
+	#apply_gravity_forces()
 	
 	if state == States.FLYING and distance_to_closest_planet() <= landing_distance:
 		state = States.LANDING
@@ -125,21 +125,25 @@ func handle_take_off():
 		apply_central_impulse(launch_direction * launch_impulse)
 
 
-func apply_gravity_forces():
-	for planet in planets:
-		if not is_instance_valid(planet):
-			continue
+#func apply_gravity_forces():
+	## HERE IS TO CHANGE GRAVITY LOGIC
+	#for planet in planets:
+		#if not is_instance_valid(planet):
+			#continue
+		#
+		#var direction_to_planet = planet.global_position - global_position
+		#var distance_sq = direction_to_planet.length_squared()
+		#
+		#if distance_sq == 0:
+			#continue
+		#
+		#var gravity_magnitude = planet.gravity_strength / distance_sq
+		#var gravity_vector = direction_to_planet.normalized() * gravity_magnitude
+		#
+		#apply_central_force(gravity_vector)
 		
-		var direction_to_planet = planet.global_position - global_position
-		var distance_sq = direction_to_planet.length_squared()
-		
-		if distance_sq == 0:
-			continue
-		
-		var gravity_magnitude = planet.gravity_strength / distance_sq
-		var gravity_vector = direction_to_planet.normalized() * gravity_magnitude
-		
-		apply_central_force(gravity_vector)
+func apply_central_gravity(force: Vector2) -> void:
+	apply_central_force(force)
 
 
 func handle_player_input():
