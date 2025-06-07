@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://ci27c1ie520gm"]
+[gd_scene load_steps=9 format=3 uid="uid://ci27c1ie520gm"]
 
 [ext_resource type="Script" uid="uid://pbqvg3utmln" path="res://level.gd" id="1_oi3di"]
 [ext_resource type="PackedScene" uid="uid://ble0en3an7434" path="res://spaceship.tscn" id="2_oi3di"]
 [ext_resource type="Texture2D" uid="uid://c0ct08hf8g6jw" path="res://fond-espace.png" id="4_0b4ue"]
 [ext_resource type="PackedScene" uid="uid://dowglo4uriad" path="res://black_hole.tscn" id="5_1ainy"]
 [ext_resource type="PackedScene" uid="uid://qh2145o353si" path="res://planet_spawner.tscn" id="5_f2txt"]
+[ext_resource type="Theme" uid="uid://cb2tqos08yhkd" path="res://assets/MinimalUI/MinimalUI.tres" id="6_n6hdu"]
+[ext_resource type="PackedScene" uid="uid://603k3vy4p3f1" path="res://scenes/settings.tscn" id="7_km5ld"]
 
 [sub_resource type="Environment" id="Environment_f2txt"]
 background_mode = 3
@@ -42,3 +44,63 @@ position = Vector2(960, 540)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_f2txt")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_n6hdu")
+
+[node name="PauseMenu" type="VBoxContainer" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -20.0
+offset_right = 50.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resume" type="Button" parent="CanvasLayer/Panel/PauseMenu"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_neighbor_top = NodePath("../MainMenu")
+focus_neighbor_bottom = NodePath("../Option")
+theme = ExtResource("6_n6hdu")
+theme_override_font_sizes/font_size = 24
+text = "Resume"
+
+[node name="Option" type="Button" parent="CanvasLayer/Panel/PauseMenu"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_neighbor_top = NodePath("../Resume")
+focus_neighbor_bottom = NodePath("../MainMenu")
+theme = ExtResource("6_n6hdu")
+theme_override_font_sizes/font_size = 24
+text = "Option"
+
+[node name="MainMenu" type="Button" parent="CanvasLayer/Panel/PauseMenu"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+focus_neighbor_top = NodePath("../Option")
+focus_neighbor_bottom = NodePath("../Resume")
+theme = ExtResource("6_n6hdu")
+theme_override_font_sizes/font_size = 24
+text = "Main Menu
+"
+
+[node name="Settings" parent="CanvasLayer/Panel" instance=ExtResource("7_km5ld")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="CanvasLayer/Panel/PauseMenu/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/PauseMenu/Option" to="." method="_on_option_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/PauseMenu/MainMenu" to="." method="_on_main_menu_pressed"]

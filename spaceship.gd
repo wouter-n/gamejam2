@@ -166,14 +166,14 @@ func apply_central_gravity(force: Vector2) -> void:
 
 func handle_player_input():
 	var rotation_direction = 0
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("Left"):
 		rotation_direction -= 1
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("Right"):
 		rotation_direction += 1
 	
 	angular_velocity = rotation_direction * rotation_velocity
 
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("Up"):
 		if !$"Fire/GPUParticles2D".emitting:
 			$"Fire/GPUParticles2D".restart()
 		$"Fire/GPUParticles2D".emitting = true

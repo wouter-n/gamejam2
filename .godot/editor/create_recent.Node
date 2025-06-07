@@ -1,6 +1,10 @@
-GPUParticles2D
-AnimatedSprite2D
+Timer
+TextureRect
+Control
 Sprite2D
-Parallax2D
+WorldEnvironment
+AnimatedSprite2D
 CollisionShape2D
 Area2D
+GPUParticles2D
+Parallax2D

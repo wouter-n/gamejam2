@@ -1,9 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://wpb5quy71p0p"]
+[gd_scene load_steps=3 format=3 uid="uid://wpb5quy71p0p"]
 
 [ext_resource type="Texture2D" uid="uid://c34lkiovkyjw3" path="res://ecran-tuto.png" id="1_7n6eb"]
+[ext_resource type="Script" uid="uid://otp8x28htpni" path="res://tutorial.gd" id="1_yb1ct"]
 
-[node name="Tutorial" type="Node2D"]
+[node name="Tutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_yb1ct")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(960, 540)
+[node name="Sprite2D" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+scale = Vector2(0.666656, 0.666656)
 texture = ExtResource("1_7n6eb")
