@@ -30,11 +30,9 @@ func _ready():
 	
 		# Add different rotation speeds and direction
 	rotation_speed = random_number(0.5, 3) * random_direction()
-	rotation_speed = 3
 	
 	# Make the planets different sizes
 	var scale_factor = random_number(0.5 , 3)
-	scale_factor = 3
 	scale *= scale_factor
 	
 	# Change the scale of the children too
