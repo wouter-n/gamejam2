@@ -23,3 +23,7 @@ scale = Vector2(0.152, 0.152)
 texture = ExtResource("2_7g3nn")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.45, 0.45)
+
+[node name="TrajectoryLine" type="Line2D" parent="."]
+width = 1.0

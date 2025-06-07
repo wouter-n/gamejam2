@@ -1,0 +1,6 @@
+res://planet.tscn
+res://spaceship.tscn
+res://level.tscn
+res://spaceship.gd
+res://planet.gd
+res://level.gd

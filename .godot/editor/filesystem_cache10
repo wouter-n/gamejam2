@@ -1,3 +1,10 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1749224874
-icon.svg::CompressedTexture2D::4001731588858027006::1749224867::1749224875::1::::<><><>0<>0<>81481231014752b5251302cad8fbd131<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+::res://::1749275062
+icon.svg::CompressedTexture2D/CompressedTexture2D::6149446035316284518::1749241868::1749242095::1::::<><><>0<>0<>9810b64a00953f8d36313eb9631b6c16<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+image-removebg-preview.png::CompressedTexture2D/CompressedTexture2D::2082143908296674959::1749242092::1749242095::1::::<><><>0<>0<>14dd684cfc66c53496afc39948c26489<>res://.godot/imported/image-removebg-preview.png-4e0acbafaa55d9a4632e7b29f4e4f281.ctex::
+level.tscn::PackedScene::5392038209394872948::1749274945::0::1::::<><><>0<>0<><>::uid://blctv81qx0urh::::res://planet.tscn<>uid://ble0en3an7434::::res://spaceship.tscn
+planet.gd::GDScript/GDScript::3249306347845542106::1749274880::0::1::::<>StaticBody2D<><>0<>0<><>::
+planet.tscn::PackedScene::3163819617948320849::1749274944::0::1::::<><><>0<>0<><>::uid://bmj8uosuu8ihe::::res://planet.gd<>uid://0huocitjie5t::::res://purple-planet-isolated-transparent-background_84443-19177-removebg-preview.png
+purple-planet-isolated-transparent-background_84443-19177-removebg-preview.png::CompressedTexture2D/CompressedTexture2D::1770411194479981647::1749242092::1749242095::1::::<><><>0<>0<>04d5244496905b6a0055f4d31b56da80<>res://.godot/imported/purple-planet-isolated-transparent-background_84443-19177-removebg-preview.png-4ef16434bd9a5eed029e140b553cec2d.ctex::
+spaceship.gd::GDScript/GDScript::3139759982647353912::1749274880::0::1::::<>RigidBody2D<><>0<>0<><>::
+spaceship.tscn::PackedScene::3168281268799217689::1749274944::0::1::::<><><>0<>0<><>::uid://bky6ng0nv1l1y::::res://spaceship.gd<>uid://4wuuuq3lf2vb::::res://image-removebg-preview.png
