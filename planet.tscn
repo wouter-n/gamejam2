@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://blctv81qx0urh"]
+[gd_scene load_steps=7 format=3 uid="uid://blctv81qx0urh"]
 
 [ext_resource type="Script" uid="uid://bmj8uosuu8ihe" path="res://planet.gd" id="1_1odxm"]
-[ext_resource type="Texture2D" uid="uid://0huocitjie5t" path="res://purple-planet-isolated-transparent-background_84443-19177-removebg-preview.png" id="2_mtr83"]
+[ext_resource type="Texture2D" uid="uid://hftkx0c03aro" path="res://planet1.png" id="2_mtr83"]
+[ext_resource type="Texture2D" uid="uid://c50pms6cllq7u" path="res://planet2.png" id="3_x6khl"]
+[ext_resource type="Texture2D" uid="uid://dvu8k7nc1fge6" path="res://planet3.png" id="4_x32po"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a75xc"]
 radius = 126.0
@@ -11,10 +13,11 @@ radius = 277.045
 
 [node name="Planet" type="AnimatableBody2D" groups=["planets"]]
 script = ExtResource("1_1odxm")
+textures = Array[Texture]([ExtResource("2_mtr83"), ExtResource("3_x6khl"), ExtResource("4_x32po")])
 
 [node name="PlanetSprite" type="Sprite2D" parent="."]
-position = Vector2(-0.749996, -1.75)
-scale = Vector2(0.597, 0.593)
+position = Vector2(0.499997, 0.500006)
+scale = Vector2(0.34018, 0.34018)
 texture = ExtResource("2_mtr83")
 
 [node name="PlanetSurface" type="CollisionShape2D" parent="."]

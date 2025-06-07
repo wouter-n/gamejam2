@@ -1,53 +1,61 @@
 # Planet.gd
 # Attach this script to the planet node (a StaticBody2D).
-# This script holds the gravity value and now also handles the planet's rotation.
+# This script handles gravity, rotation, and texture randomization.
 extends StaticBody2D
 
+# --- EXPORTED VARIABLES ---
 # This controls the speed of the planet's rotation in radians per second.
-# A positive value spins it counter-clockwise, a negative value clockwise.
 @export var rotation_speed: float = 0.4
+# Drag your texture files from the FileSystem dock into these slots in the Inspector.
+@export var textures: Array[Texture]
 
-var gravity_node: Node2D
-var gravity_offset: Vector2
 
-var rng = RandomNumberGenerator.new()
+# --- NODE REFERENCES ---
+@onready var sprite = $PlanetSprite
+@onready var gravity_node = $GravityArea
+@onready var collision_surface = $PlanetSurface
 
+# --- CONSTANTS ---
 const SPACESHIP_MASS = 10
 const GRAVITY_CONSTANT: float = 350.0
 const MASS_PER_RADIUS_PIXEL: float = 100.0
 
-@export var radius: float
+# --- CLASS VARIABLES ---
+var gravity_offset: Vector2
+var rng = RandomNumberGenerator.new()
+var radius: float
 var mass: float
-
 var surface_gravity: Vector2
 
 func _ready():
 	# Initialize random number generator
 	rng.randomize()
 	
-	# Set the gravity node
-	gravity_node = $GravityArea
+	# --- NEW: Randomly select a texture for the planet sprite ---
+	if not textures.is_empty():
+		if sprite:
+			sprite.texture = textures.pick_random()
+		else:
+			print("Error: PlanetSprite node not found! Cannot set texture.")
+	else:
+		print("Warning: No textures assigned in the 'textures' array.")
 	
-		# Add different rotation speeds and direction
+	# Add different rotation speeds and direction
 	rotation_speed = random_number(0.5, 3) * random_direction()
 	
 	# Make the planets different sizes
-	var scale_factor = random_number(0.5 , 3)
+	var scale_factor = random_number(0.5, 3)
 	scale *= scale_factor
 	
-	# Change the scale of the children too
-	for child in self.get_children():
-		child.scale *= scale_factor
-	
 	# Get the radius for ease of calculations with the spaceship
-	var collision_surface = self.get_node("PlanetSurface") as CollisionShape2D
-	
-	radius = collision_surface.shape.radius * global_scale.x * scale_factor
-	mass = radius * MASS_PER_RADIUS_PIXEL
-	
-	surface_gravity = get_gravity_force(Vector2.ONE)
-	print("Radius, Mass, Grav: \n\t", radius, "\n\t", mass, "\n\t", surface_gravity)
-	
+	if collision_surface and collision_surface.shape is CircleShape2D:
+		radius = collision_surface.shape.radius * scale.x # Use the new scale
+		mass = radius * MASS_PER_RADIUS_PIXEL
+		surface_gravity = get_gravity_force(Vector2.ONE)
+		print("Radius, Mass, Grav: \n\t", radius, "\n\t", mass, "\n\t", surface_gravity)
+	else:
+		print("Error: Could not find CollisionShape2D with a CircleShape2D to determine radius.")
+
 	# Add this node to the "planets" group when the scene starts.
 	# This allows the spaceship to easily find it without a direct node path.
 	add_to_group("planets")
@@ -58,23 +66,26 @@ func _physics_process(delta):
 	# Using delta makes the rotation smooth and independent of the frame rate.
 	rotation += rotation_speed * delta
 	
-	# Keep the collision box from rotating
-	gravity_node.rotation -= rotation_speed * delta
+	# Keep the gravity area and collision shape from rotating with the parent
+	if gravity_node:
+		gravity_node.rotation -= rotation_speed * delta
 	
+	# Apply gravity to bodies within the GravityArea
 	for body in $GravityArea.get_overlapping_bodies():
-		if not body is RigidBody2D:
-			continue
-		
-		var vector_to_spaceship = (global_position - body.global_position)
-		body.apply_central_gravity(get_gravity_force(vector_to_spaceship))
+		if body is RigidBody2D:
+			var vector_to_spaceship = (global_position - body.global_position)
+			body.apply_central_force(get_gravity_force(vector_to_spaceship))
 
 
 func get_gravity_force(vector_to_spaceship: Vector2) -> Vector2:
-	var distance_to_spaceship = vector_to_spaceship.length()
+	var distance_sq = vector_to_spaceship.length_squared()
+	if distance_sq == 0:
+		return Vector2.ZERO
+
 	var direction_to_spaceship = vector_to_spaceship.normalized()
 	
-	var gravity_force = (GRAVITY_CONSTANT * SPACESHIP_MASS * mass) / (distance_to_spaceship ** 2)	
-	return gravity_force * direction_to_spaceship
+	var gravity_force_magnitude = (GRAVITY_CONSTANT * SPACESHIP_MASS * mass) / distance_sq
+	return direction_to_spaceship * gravity_force_magnitude
 
 
 func random_number(low, high):
@@ -82,8 +93,7 @@ func random_number(low, high):
 	
 	
 func random_direction():
-	var random_direction = rng.randi_range(-1, 0)
-	if random_direction == 0:
-		random_direction = 1
-	
-	return random_direction
+	if rng.randi_range(0, 1) == 0:
+		return -1
+	else:
+		return 1

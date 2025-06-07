@@ -1,31 +1,138 @@
-[gd_scene load_steps=4 format=3 uid="uid://ble0en3an7434"]
+[gd_scene load_steps=19 format=3 uid="uid://ble0en3an7434"]
 
 [ext_resource type="Script" uid="uid://bky6ng0nv1l1y" path="res://spaceship.gd" id="1_y3uy0"]
-[ext_resource type="Texture2D" uid="uid://4wuuuq3lf2vb" path="res://image-removebg-preview.png" id="2_7g3nn"]
+[ext_resource type="Texture2D" uid="uid://b4ealxg2ifm71" path="res://vaisseaux_1-frame-1.png" id="2_gsmss"]
+[ext_resource type="Texture2D" uid="uid://ceapy8h2m8qmk" path="res://vaisseaux_1-idle-1.png" id="2_rowme"]
+[ext_resource type="Texture2D" uid="uid://crxtsnl0k44tv" path="res://vaisseaux_1-frame-2.png" id="3_rowme"]
+[ext_resource type="Texture2D" uid="uid://c0kr1oidbmnvb" path="res://vaisseaux_1-frame-3.png" id="4_aknta"]
+[ext_resource type="Texture2D" uid="uid://b24bogygk0u2u" path="res://vaisseaux_1-particule-1.png" id="4_yqmem"]
+[ext_resource type="Texture2D" uid="uid://dibd56rqg22l4" path="res://vaisseaux_1-frame-4.png" id="5_3cgi1"]
+[ext_resource type="Texture2D" uid="uid://c526k8smkv6qj" path="res://vaisseaux_1-atterri-1.png" id="5_bkiek"]
+[ext_resource type="Texture2D" uid="uid://6upggqyasj4c" path="res://vaisseaux_1-degat-1.png" id="5_fdw3y"]
+[ext_resource type="Texture2D" uid="uid://din4e30bw2ql3" path="res://vaisseaux_1-explosion-1.png" id="6_xkbdo"]
+[ext_resource type="Texture2D" uid="uid://dabb0vih5qgdo" path="res://vaisseaux_feu-frame-1.png" id="7_3cgi1"]
+[ext_resource type="Texture2D" uid="uid://bd1eharl8mljb" path="res://vaisseaux_1-explosion-2.png" id="7_qsnst"]
+[ext_resource type="Texture2D" uid="uid://cc2u0suftcr8t" path="res://vaisseaux_1-explosion-3.png" id="8_a35v7"]
+[ext_resource type="Texture2D" uid="uid://dpulg6dqlik6r" path="res://vaisseaux_feu-frame-2.png" id="8_bkiek"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yqmem"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_3cgi1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_bkiek")
+}],
+"loop": true,
+"name": &"fire",
+"speed": 2.0
+}]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bkiek"]
+lifetime_randomness = 0.08
+particle_flag_disable_z = true
+angle_min = -258.3
+angle_max = 237.2
+direction = Vector3(0, 1, 0)
+spread = 95.964
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.01
+scale_max = 0.05
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bkiek"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": ExtResource("5_fdw3y")
+}, {
+"duration": 1.5,
+"texture": ExtResource("6_xkbdo")
+}, {
+"duration": 1.5,
+"texture": ExtResource("7_qsnst")
+}, {
+"duration": 1.5,
+"texture": ExtResource("8_a35v7")
+}],
+"loop": true,
+"name": &"death",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rowme")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_bkiek")
+}],
+"loop": true,
+"name": &"land",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gsmss")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rowme")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_aknta")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3cgi1")
+}],
+"loop": true,
+"name": &"thrust",
+"speed": 4.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmkdn"]
-size = Vector2(45, 40)
+size = Vector2(53.8889, 36.1111)
 
 [node name="Spaceship" type="RigidBody2D"]
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_y3uy0")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Fire" type="AnimatedSprite2D" parent="."]
+position = Vector2(-34, -7.7307e-12)
+rotation = 1.57079
+scale = Vector2(0.188457, 0.188457)
+sprite_frames = SubResource("SpriteFrames_yqmem")
+animation = &"fire"
+frame_progress = 0.611402
+speed_scale = 5.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Fire"]
+position = Vector2(-6.10352e-05, 31.8375)
+amount = 25
+texture = ExtResource("4_yqmem")
+lifetime = 0.3
+interp_to_end = 0.103
+randomness = 0.3
+process_material = SubResource("ParticleProcessMaterial_bkiek")
+
+[node name="Ship" type="AnimatedSprite2D" parent="."]
+position = Vector2(-9.53674e-07, -9.53674e-07)
+rotation = 1.57079
+scale = Vector2(0.162827, 0.162827)
+sprite_frames = SubResource("SpriteFrames_bkiek")
+animation = &"death"
+frame_progress = 0.95828
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(2.5, 0)
+position = Vector2(0.499999, 0.500005)
 scale = Vector2(1.8, 1.8)
 shape = SubResource("RectangleShape2D_pmkdn")
 
-[node name="Image-removebg-preview" type="Sprite2D" parent="."]
-rotation = 1.5708
-scale = Vector2(0.272, 0.272)
-texture = ExtResource("2_7g3nn")
-
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.45, 0.45)
-
-[node name="TrajectoryLine" type="Line2D" parent="."]
-width = 1.0
+zoom = Vector2(0.75, 0.75)
