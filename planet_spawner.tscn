@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://qh2145o353si"]
+[gd_scene load_steps=3 format=3 uid="uid://bgkcbcoxvbthf"]
 
 [ext_resource type="Script" uid="uid://5q84ej13ydha" path="res://planet_spawner.gd" id="1_wkxom"]
 [ext_resource type="PackedScene" uid="uid://blctv81qx0urh" path="res://planet.tscn" id="2_arja0"]

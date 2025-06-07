@@ -13,6 +13,21 @@ extends Node2D
 var last_spawn_x: float = -INF
 var last_spawn_y: float = -INF
 
+var cam_rect: Rect2
+var cam_size: Vector2
+
+
+
+func _ready() -> void:
+	#player = 
+	cam_rect = camera.get_viewport_rect()
+	cam_size = cam_rect.size
+
+
+func spawn_planet_ahead():
+	var cam_center = camera.global_position
+	
+
 func spawn_planets():
 	var cam_rect = camera.get_viewport_rect()
 	var cam_size = cam_rect.size
@@ -65,6 +80,6 @@ func _process(delta):
 	var player_x = player.global_position.x
 
 	# Spawn only when player has moved far enough from last spawn
-	if player_x > last_spawn_x + min_spacing:
-		spawn_planets()
-		last_spawn_x = player_x
+	#if player_x > last_spawn_x + min_spacing:
+		#spawn_planets()
+		#last_spawn_x = player_x

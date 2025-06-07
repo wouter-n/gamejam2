@@ -74,9 +74,9 @@ func _physics_process(delta: float) -> void:
 			
 
 	# For debugging
-	if state != old_state:
-		print("New state:", States.keys()[state])
-		old_state = state
+	#if state != old_state:
+		#print("New state:", States.keys()[state])
+		#old_state = state
 
 
 func planet_touchdown(body):
