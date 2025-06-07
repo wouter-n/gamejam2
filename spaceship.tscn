@@ -15,11 +15,12 @@ script = ExtResource("1_y3uy0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.5, 0)
+scale = Vector2(1.8, 1.8)
 shape = SubResource("RectangleShape2D_pmkdn")
 
 [node name="Image-removebg-preview" type="Sprite2D" parent="."]
 rotation = 1.5708
-scale = Vector2(0.152, 0.152)
+scale = Vector2(0.272, 0.272)
 texture = ExtResource("2_7g3nn")
 
 [node name="Camera2D" type="Camera2D" parent="."]
