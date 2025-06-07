@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ble0en3an7434"]
+[gd_scene load_steps=21 format=3 uid="uid://ble0en3an7434"]
 
 [ext_resource type="Script" uid="uid://bky6ng0nv1l1y" path="res://spaceship.gd" id="1_y3uy0"]
 [ext_resource type="Texture2D" uid="uid://b4ealxg2ifm71" path="res://vaisseaux_1-frame-1.png" id="2_gsmss"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://dibd56rqg22l4" path="res://vaisseaux_1-frame-4.png" id="5_3cgi1"]
 [ext_resource type="Texture2D" uid="uid://c526k8smkv6qj" path="res://vaisseaux_1-atterri-1.png" id="5_bkiek"]
 [ext_resource type="Texture2D" uid="uid://6upggqyasj4c" path="res://vaisseaux_1-degat-1.png" id="5_fdw3y"]
+[ext_resource type="Texture2D" uid="uid://75oif16h54h6" path="res://vaisseaux_1-degat-0.png" id="5_qsnst"]
+[ext_resource type="Texture2D" uid="uid://dverkwxnk3w0r" path="res://vaisseaux_1-degat-2.png" id="6_a35v7"]
 [ext_resource type="Texture2D" uid="uid://din4e30bw2ql3" path="res://vaisseaux_1-explosion-1.png" id="6_xkbdo"]
 [ext_resource type="Texture2D" uid="uid://dabb0vih5qgdo" path="res://vaisseaux_feu-frame-1.png" id="7_3cgi1"]
 [ext_resource type="Texture2D" uid="uid://bd1eharl8mljb" path="res://vaisseaux_1-explosion-2.png" id="7_qsnst"]
@@ -45,21 +47,27 @@ scale_max = 0.05
 [sub_resource type="SpriteFrames" id="SpriteFrames_bkiek"]
 animations = [{
 "frames": [{
-"duration": 0.5,
+"duration": 0.7,
+"texture": ExtResource("5_qsnst")
+}, {
+"duration": 3.0,
+"texture": ExtResource("6_a35v7")
+}, {
+"duration": 1.0,
 "texture": ExtResource("5_fdw3y")
 }, {
-"duration": 1.5,
+"duration": 1.0,
 "texture": ExtResource("6_xkbdo")
 }, {
-"duration": 1.5,
+"duration": 1.0,
 "texture": ExtResource("7_qsnst")
 }, {
-"duration": 1.5,
+"duration": 1.0,
 "texture": ExtResource("8_a35v7")
 }],
 "loop": false,
 "name": &"death",
-"speed": 3.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -127,7 +135,7 @@ rotation = 1.57079
 scale = Vector2(0.162827, 0.162827)
 sprite_frames = SubResource("SpriteFrames_bkiek")
 animation = &"death"
-frame_progress = 0.95828
+speed_scale = 0.9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4.23193e-06, -3.39746e-06)
@@ -135,4 +143,3 @@ scale = Vector2(1.8, 1.8)
 shape = SubResource("RectangleShape2D_pmkdn")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.75, 0.75)

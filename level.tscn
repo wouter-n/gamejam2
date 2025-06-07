@@ -1,9 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://ci27c1ie520gm"]
+[gd_scene load_steps=7 format=3 uid="uid://ci27c1ie520gm"]
 
 [ext_resource type="Script" uid="uid://pbqvg3utmln" path="res://level.gd" id="1_oi3di"]
 [ext_resource type="PackedScene" uid="uid://ble0en3an7434" path="res://spaceship.tscn" id="2_oi3di"]
 [ext_resource type="Texture2D" uid="uid://c0ct08hf8g6jw" path="res://fond-espace.png" id="4_0b4ue"]
-[ext_resource type="PackedScene" path="res://planet_spawner.tscn" id="5_f2txt"]
+[ext_resource type="PackedScene" uid="uid://dowglo4uriad" path="res://black_hole.tscn" id="5_1ainy"]
+[ext_resource type="PackedScene" uid="uid://qh2145o353si" path="res://planet_spawner.tscn" id="5_f2txt"]
+
+[sub_resource type="Environment" id="Environment_f2txt"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 3.0
+glow_bloom = 0.1
+glow_hdr_scale = 1.62
+adjustment_enabled = true
+adjustment_brightness = 1.2
+adjustment_contrast = 1.4
+adjustment_saturation = 1.4
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_oi3di")
@@ -21,5 +33,12 @@ texture = ExtResource("4_0b4ue")
 [node name="PlanetSpawner" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_f2txt")]
 player = NodePath("../Spaceship")
 
+[node name="Black Hole" parent="." instance=ExtResource("5_1ainy")]
+position = Vector2(-150, 540)
+player_node = NodePath("../Spaceship")
+
 [node name="Spaceship" parent="." instance=ExtResource("2_oi3di")]
 position = Vector2(960, 540)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_f2txt")

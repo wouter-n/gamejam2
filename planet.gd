@@ -11,14 +11,11 @@ extends StaticBody2D
 # Allow to be used from the spaceship
 @export var radius: float
 
-# --- NODE REFERENCES ---
-@onready var sprite = $PlanetSprite
-@onready var gravity_node = $GravityArea
-@onready var collision_surface = $PlanetSurface
+
 
 # --- CONSTANTS ---
 const SPACESHIP_MASS = 10
-const GRAVITY_CONSTANT: float = 500.0
+const GRAVITY_CONSTANT: float = 300.0
 const MASS_PER_RADIUS_PIXEL: float = 100.0
 
 # --- CLASS VARIABLES ---
@@ -28,10 +25,9 @@ var mass: float
 @export var surface_gravity: Vector2
 
 func _ready():
-	# Initialize random number generator
 	rng.randomize()
 	
-	# --- NEW: Randomly select a texture for the planet sprite ---
+	var sprite = self.get_node("PlanetSprite") as Sprite2D
 	if not textures.is_empty():
 		if sprite:
 			sprite.texture = textures.pick_random()
@@ -47,9 +43,12 @@ func _ready():
 	var scale_factor = random_number(0.5, 3)
 	scale *= scale_factor
 	
-	# Get the radius for ease of calculations with the spaceship
+	for child in get_children():
+		child.scale *= scale_factor
+	
+	var collision_surface = self.get_node("PlanetSurface") as CollisionShape2D
 	if collision_surface and collision_surface.shape is CircleShape2D:
-		radius = collision_surface.shape.radius * scale.x # Use the new scale
+		radius = collision_surface.shape.radius * global_scale.x * scale_factor
 		mass = radius * MASS_PER_RADIUS_PIXEL
 		surface_gravity = get_gravity_force(Vector2.ONE)
 		#print("Radius, Mass, Grav: \n\t", radius, "\n\t", mass, "\n\t", surface_gravity)
@@ -66,12 +65,12 @@ func _physics_process(delta):
 	# Using delta makes the rotation smooth and independent of the frame rate.
 	rotation += rotation_speed * delta
 	
-	# Keep the gravity area and collision shape from rotating with the parent
+	var gravity_node = self.get_node("GravityArea") as Area2D
 	if gravity_node:
 		gravity_node.rotation -= rotation_speed * delta
 	
 	# Apply gravity to bodies within the GravityArea
-	for body in $GravityArea.get_overlapping_bodies():
+	for body in gravity_node.get_overlapping_bodies():
 		if body is RigidBody2D:
 			var vector_to_spaceship = (global_position - body.global_position)
 			body.apply_central_force(get_gravity_force(vector_to_spaceship))

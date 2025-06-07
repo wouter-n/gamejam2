@@ -7,7 +7,7 @@ extends RigidBody2D
 @export var thrust_force: float = 500.0
 @export var rotation_velocity: float = 6.0
 @export var braking_dampening: float = 2.0
-@export var launch_impulse: float = 500
+@export var launch_impulse: float = 1000
 
 # --- Animation Node ---
 @onready var animated_sprite: AnimatedSprite2D = $Ship
@@ -67,8 +67,11 @@ func _physics_process(delta: float) -> void:
 			taking_off(delta)
 			#animated_thruster.hide()
 		else:
-			# Move with the planet
-			global_transform = landed_planet.global_transform * offset
+			if landed_planet == null:
+				death_animation()
+			else:
+				global_transform = landed_planet.global_transform * offset
+			
 
 	# For debugging
 	if state != old_state:
@@ -113,7 +116,7 @@ func death_animation() -> void:
 func _on_death_animation_finished() -> void:
 	# Function is called after the death animation is finished
 	hide()
-	get_tree().paused = true
+	get_tree().reload_current_scene()
 
 
 func distance_to_closest_planet():
