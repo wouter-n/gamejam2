@@ -1,24 +1,50 @@
-[gd_scene load_steps=4 format=3 uid="uid://1wifdxmftf33"]
+[gd_scene load_steps=7 format=3 uid="uid://1wifdxmftf33"]
 
-[ext_resource type="Texture2D" uid="uid://yowuqea33phc" path="res://Assets/spaceship.png" id="1_p8lcy"]
 [ext_resource type="Script" uid="uid://d3lolpl5shcrh" path="res://spaceship.gd" id="1_q1owq"]
+[ext_resource type="Texture2D" uid="uid://s2w7qpyiav8y" path="res://Vtest-body-vol.png" id="2_q1owq"]
+[ext_resource type="Texture2D" uid="uid://wyu45jvhnxo4" path="res://Vtest-feu1.png" id="3_8jiwu"]
+[ext_resource type="Texture2D" uid="uid://cxrnarbrt3y3m" path="res://Vtest-feu2.png" id="4_mkm6d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1owq"]
-size = Vector2(20, 22)
+size = Vector2(14, 19)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4biqu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_8jiwu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mkm6d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_q1owq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.141375, 0.138456)
-texture = ExtResource("1_p8lcy")
+position = Vector2(0, -8.9407e-08)
+scale = Vector2(0.0613541, 0.0600873)
+texture = ExtResource("2_q1owq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_q1owq")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(0.645688, 1.09522)
-zoom = Vector2(2, 2)
+zoom = Vector2(3, 3)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = -1
+position = Vector2(0, 13)
+scale = Vector2(0.07, 0.065355)
+sprite_frames = SubResource("SpriteFrames_4biqu")
+frame_progress = 0.513782

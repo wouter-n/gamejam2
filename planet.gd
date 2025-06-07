@@ -12,10 +12,15 @@ extends AnimatableBody2D
 			$Sprite2D.texture = planet_texture
 		update_visuals()
 @export var texture_pixels: int = 1129
+@export var rotation_speed: int = 0
+
+@export var max_rot_speed = 2
+		
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		update_visuals()
+	rotation_speed = randf_range(-max_rot_speed, max_rot_speed)
 		
 func _enter_tree() -> void:
 	queue_redraw()
@@ -32,3 +37,7 @@ func update_visuals() -> void:
 	var shape = $CollisionShape2D.shape
 	if shape is CircleShape2D:
 		shape.radius = planet_radius
+
+func _physics_process(delta: float) -> void:
+	rotation += rotation_speed * delta
+	

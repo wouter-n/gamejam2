@@ -5,13 +5,17 @@
 [ext_resource type="Texture2D" uid="uid://dm3kela7v4lsf" path="res://Assets/planet.png" id="2_485rr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8g7i6"]
-radius = 25.0
+radius = 64.0
 
 [node name="Planet" type="AnimatableBody2D"]
 script = ExtResource("1_mtr83")
 planet_texture = ExtResource("2_485rr")
+rotation_speed = null
+max_rot_speed = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.113375, 0.113375)
+texture = ExtResource("2_485rr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_8g7i6")

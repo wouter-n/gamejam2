@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cu0j5f2y0wcxq"]
+[gd_scene load_steps=11 format=3 uid="uid://cu0j5f2y0wcxq"]
 
 [ext_resource type="PackedScene" uid="uid://1wifdxmftf33" path="res://Spaceship.tscn" id="1_c6gwx"]
 [ext_resource type="Texture2D" uid="uid://bdi27520erlvg" path="res://Assets/starfield.jpg" id="2_2dftf"]
 [ext_resource type="PackedScene" uid="uid://yd7ja8dnm8f6" path="res://GravityPoint2D.tscn" id="3_bcbcq"]
 [ext_resource type="Script" uid="uid://b4irt2vb4mr43" path="res://planet.gd" id="3_eu7l1"]
 [ext_resource type="Texture2D" uid="uid://dm3kela7v4lsf" path="res://Assets/planet.png" id="4_eu7l1"]
+[ext_resource type="PackedScene" uid="uid://dpsqwroaax2a1" path="res://rigid_test.tscn" id="6_p1v5b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eu7l1"]
 radius = 64.0
@@ -35,9 +36,11 @@ scale = Vector2(0.204083, 0.204083)
 texture = ExtResource("2_2dftf")
 
 [node name="Planet" type="AnimatableBody2D" parent="."]
-position = Vector2(316, 229)
+position = Vector2(503, -71)
+rotation = 36.8496
 script = ExtResource("3_eu7l1")
 planet_texture = ExtResource("4_eu7l1")
+rotation_speed = -1
 
 [node name="Sprite2D" type="Sprite2D" parent="Planet"]
 scale = Vector2(0.113375, 0.113375)
@@ -54,7 +57,8 @@ radius = 150.0
 shape = SubResource("CircleShape2D_p1v5b")
 
 [node name="Planet2" type="AnimatableBody2D" parent="."]
-position = Vector2(800, 466)
+position = Vector2(1178, 157)
+rotation = -57.2993
 script = ExtResource("3_eu7l1")
 planet_radius = 25.0
 planet_texture = ExtResource("4_eu7l1")
@@ -73,6 +77,9 @@ radius = 300.0
 
 [node name="CollisionShape2D" parent="Planet2/GravityPoint2D" index="0"]
 shape = SubResource("CircleShape2D_wygdx")
+
+[node name="Rigid_test" parent="." instance=ExtResource("6_p1v5b")]
+position = Vector2(316, 545)
 
 [editable path="Planet/GravityPoint2D"]
 [editable path="Planet2/GravityPoint2D"]
