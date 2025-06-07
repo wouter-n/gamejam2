@@ -13,7 +13,7 @@ var gravity_offset: Vector2
 var rng = RandomNumberGenerator.new()
 
 const SPACESHIP_MASS = 10
-const GRAVITY_CONSTANT: float = 250.0
+const GRAVITY_CONSTANT: float = 350.0
 const MASS_PER_RADIUS_PIXEL: float = 100.0
 
 var radius: float

@@ -1,27 +1,15 @@
 [gd_scene load_steps=5 format=3 uid="uid://ci27c1ie520gm"]
 
 [ext_resource type="Script" uid="uid://pbqvg3utmln" path="res://level.gd" id="1_oi3di"]
-[ext_resource type="PackedScene" uid="uid://blctv81qx0urh" path="res://planet.tscn" id="1_vonw3"]
 [ext_resource type="PackedScene" uid="uid://ble0en3an7434" path="res://spaceship.tscn" id="2_oi3di"]
 [ext_resource type="Texture2D" uid="uid://c0ct08hf8g6jw" path="res://fond-espace.png" id="4_0b4ue"]
+[ext_resource type="PackedScene" uid="uid://qh2145o353si" path="res://planet_spawner.tscn" id="5_f2txt"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_oi3di")
 
-[node name="Planet" parent="." instance=ExtResource("1_vonw3")]
-position = Vector2(322, 280)
-
 [node name="Spaceship" parent="." instance=ExtResource("2_oi3di")]
 position = Vector2(1027, 235)
-
-[node name="Planet2" parent="." instance=ExtResource("1_vonw3")]
-position = Vector2(1290, 715)
-
-[node name="Planet3" parent="." instance=ExtResource("1_vonw3")]
-position = Vector2(1483, -276)
-
-[node name="Planet4" parent="." instance=ExtResource("1_vonw3")]
-position = Vector2(264, 1236)
 
 [node name="Starfield" type="ParallaxBackground" parent="."]
 
@@ -36,3 +24,6 @@ texture = ExtResource("4_0b4ue")
 position = Vector2(-835, 343)
 scale = Vector2(1.75129, 1.75129)
 texture = ExtResource("4_0b4ue")
+
+[node name="PlanetSpawner" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_f2txt")]
+player = NodePath("../Spaceship")
