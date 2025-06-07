@@ -8,7 +8,8 @@ extends StaticBody2D
 @export var rotation_speed: float = 0.4
 # Drag your texture files from the FileSystem dock into these slots in the Inspector.
 @export var textures: Array[Texture]
-
+# Allow to be used from the spaceship
+@export var radius: float
 
 # --- NODE REFERENCES ---
 @onready var sprite = $PlanetSprite
@@ -17,15 +18,14 @@ extends StaticBody2D
 
 # --- CONSTANTS ---
 const SPACESHIP_MASS = 10
-const GRAVITY_CONSTANT: float = 350.0
+const GRAVITY_CONSTANT: float = 500.0
 const MASS_PER_RADIUS_PIXEL: float = 100.0
 
 # --- CLASS VARIABLES ---
-var gravity_offset: Vector2
 var rng = RandomNumberGenerator.new()
-var radius: float
+
 var mass: float
-var surface_gravity: Vector2
+@export var surface_gravity: Vector2
 
 func _ready():
 	# Initialize random number generator
@@ -52,7 +52,7 @@ func _ready():
 		radius = collision_surface.shape.radius * scale.x # Use the new scale
 		mass = radius * MASS_PER_RADIUS_PIXEL
 		surface_gravity = get_gravity_force(Vector2.ONE)
-		print("Radius, Mass, Grav: \n\t", radius, "\n\t", mass, "\n\t", surface_gravity)
+		#print("Radius, Mass, Grav: \n\t", radius, "\n\t", mass, "\n\t", surface_gravity)
 	else:
 		print("Error: Could not find CollisionShape2D with a CircleShape2D to determine radius.")
 

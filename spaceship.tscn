@@ -57,7 +57,7 @@ animations = [{
 "duration": 1.5,
 "texture": ExtResource("8_a35v7")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 3.0
 }, {
@@ -96,7 +96,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmkdn"]
-size = Vector2(53.8889, 36.1111)
+size = Vector2(53.3333, 36.6667)
 
 [node name="Spaceship" type="RigidBody2D"]
 contact_monitor = true
@@ -130,7 +130,7 @@ animation = &"death"
 frame_progress = 0.95828
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.499999, 0.500005)
+position = Vector2(-4.23193e-06, -3.39746e-06)
 scale = Vector2(1.8, 1.8)
 shape = SubResource("RectangleShape2D_pmkdn")
 

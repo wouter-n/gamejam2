@@ -20,6 +20,7 @@ func spawn_planets():
 
 	var start_x = cam_center.x + cam_size.x + spawn_margin * 2
 	var screen_height = cam_size.y
+	
 	var min_y = cam_center.y - screen_height / 2 - vertical_padding
 	var max_y = cam_center.y + screen_height / 2 + vertical_padding
 

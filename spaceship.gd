@@ -17,11 +17,11 @@ extends RigidBody2D
 var planets: Array = []
 
 enum LandingStates {CLEAN, NOSE, SIDE}
-enum States {FLYING, LANDING, LANDED, TAKE_OFF, DYING, DEAD}
+enum States {FLYING, LANDING, LANDED, TAKE_OFF, DEAD}
 var state: States = States.FLYING
 var landing_states: LandingStates = LandingStates.CLEAN
 
-var takeoff_distance = 100
+var takeoff_distance = 50
 var takeoff_direction: Vector2
 
 var landed_planet: Node2D = null
@@ -32,30 +32,40 @@ var old_state = States.FLYING
 
 func _ready():
 	planets = get_tree().get_nodes_in_group("planets")
+	
 	connect("body_entered", Callable(self, "planet_touchdown"))
+	
 	# Start with the idle animation
 	animated_sprite.play("idle")
 	animated_thruster.hide()
 
 
 func _physics_process(delta: float) -> void:
-	if state == States.DYING:
-		death_animation()
+	if state == States.DEAD:
+		# Do nothing
+		pass
 	elif state == States.TAKE_OFF and distance_to_closest_planet() > takeoff_distance:
 		animated_thruster.show()
 		animated_thruster.play("fire")
+		
+		landed_planet = null
 		state = States.FLYING
+	
 	elif state == States.TAKE_OFF:
 		animated_thruster.show()
 		animated_thruster.play("fire")
-		taking_off(delta)
+		
+		handle_player_input()
+	
 	elif state == States.FLYING:
 		handle_player_input()
+	
 	elif state == States.LANDED:
 		animated_sprite.play("land")
+	
 		if Input.is_action_just_pressed("ui_accept"):
 			taking_off(delta)
-			animated_thruster.hide()
+			#animated_thruster.hide()
 		else:
 			# Move with the planet
 			global_transform = landed_planet.global_transform * offset
@@ -67,7 +77,7 @@ func _physics_process(delta: float) -> void:
 
 
 func planet_touchdown(body):
-	if body.is_in_group("planets") and state != States.TAKE_OFF:
+	if state not in [States.TAKE_OFF, States.DEAD] and body.is_in_group("planets"):
 		var planet = body
 		state = States.LANDED
 		landed_planet = planet
@@ -81,35 +91,29 @@ func planet_touchdown(body):
 		var ship_down = -transform.x.normalized()
 	
 		var dot = ship_down.dot(dist_to_planet)
-		if dot > 0.75:
-			print("Proper landing")
+		if dot <= 0.60:
+			death_animation()
 		else:
-			animated_sprite.play("death")
-			state = States.DYING
-				
-		# Compute angle facing away from center (so ship is "standing up")
-		var angle = direction.angle()
-		rotation = angle
-		offset = planet.global_transform.affine_inverse() * global_transform
+			# Compute angle facing away from center (so ship is "standing up")
+			var angle = direction.angle()
+			rotation = angle
+			offset = planet.global_transform.affine_inverse() * global_transform
+
 
 func death_animation() -> void:
-	if !animated_sprite.is_playing():
-		state = States.DEAD
-	else:
-		print("💥 KABOOM!")
-		set_physics_process(false)
-		set_process(false)
+	state = States.DEAD
+	animated_sprite.play("death")
+	animated_sprite.connect("animation_finished", _on_death_animation_finished)
+	
+	print("💥 KABOOM!")
+	set_physics_process(false)
+	set_process(false)
 
-func _explode() -> void:
+
+func _on_death_animation_finished() -> void:
+	# Function is called after the death animation is finished
 	hide()
 	get_tree().paused = true
-
-
-func distance_from_landed_planet():
-	if landed_planet == null:
-		return INF
-	var vector_to_planet = landed_planet.global_position - global_position
-	return vector_to_planet.length()
 
 
 func distance_to_closest_planet():
@@ -138,16 +142,19 @@ func short_angle_distance(a, b):
 
 
 func taking_off(delta):
-	if Input.is_action_just_pressed("ui_accept") and landed_planet != null:
+	#if Input.is_action_just_pressed("ui_accept") and landed_planet != null:
+	if landed_planet != null:
 		state = States.TAKE_OFF
+		
 		# Play thrust animation when taking off
 		animated_sprite.play("thrust")
 	
-	var takeoff_direction = transform.x.normalized()
-	var launch_power = 500 + landed_planet.radius * 6.0
-	
-	angular_velocity = 0
-	apply_central_impulse(takeoff_direction * launch_power * delta)
+		var takeoff_direction = transform.x.normalized()
+		var launch_power = 500 + landed_planet.radius * landed_planet.rotation
+		
+		angular_velocity = 0
+		apply_central_impulse(takeoff_direction * launch_power)
+
 
 
 func apply_central_gravity(force: Vector2) -> void:

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://pbqvg3utmln" path="res://level.gd" id="1_oi3di"]
 [ext_resource type="PackedScene" uid="uid://ble0en3an7434" path="res://spaceship.tscn" id="2_oi3di"]
 [ext_resource type="Texture2D" uid="uid://c0ct08hf8g6jw" path="res://fond-espace.png" id="4_0b4ue"]
-[ext_resource type="PackedScene" uid="uid://qh2145o353si" path="res://planet_spawner.tscn" id="5_f2txt"]
+[ext_resource type="PackedScene" path="res://planet_spawner.tscn" id="5_f2txt"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_oi3di")

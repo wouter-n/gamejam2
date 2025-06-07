@@ -6,10 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://dvu8k7nc1fge6" path="res://planet3.png" id="4_x32po"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a75xc"]
-radius = 126.0
+radius = 126.004
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mtr83"]
-radius = 277.045
+radius = 400.061
 
 [node name="Planet" type="AnimatableBody2D" groups=["planets"]]
 script = ExtResource("1_1odxm")
@@ -26,5 +26,4 @@ shape = SubResource("CircleShape2D_a75xc")
 [node name="GravityArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GravityArea"]
-visible = false
 shape = SubResource("CircleShape2D_mtr83")
