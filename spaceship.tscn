@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ble0en3an7434"]
+[gd_scene load_steps=28 format=3 uid="uid://ble0en3an7434"]
 
 [ext_resource type="Script" uid="uid://bky6ng0nv1l1y" path="res://spaceship.gd" id="1_y3uy0"]
 [ext_resource type="Texture2D" uid="uid://b4ealxg2ifm71" path="res://vaisseaux_1-frame-1.png" id="2_gsmss"]
@@ -16,6 +16,12 @@
 [ext_resource type="Texture2D" uid="uid://bd1eharl8mljb" path="res://vaisseaux_1-explosion-2.png" id="7_qsnst"]
 [ext_resource type="Texture2D" uid="uid://cc2u0suftcr8t" path="res://vaisseaux_1-explosion-3.png" id="8_a35v7"]
 [ext_resource type="Texture2D" uid="uid://dpulg6dqlik6r" path="res://vaisseaux_feu-frame-2.png" id="8_bkiek"]
+[ext_resource type="Texture2D" uid="uid://ds12xg4aaeaev" path="res://ecran-interface-1.png" id="17_a35v7"]
+[ext_resource type="Texture2D" uid="uid://dhh6152dhw5ii" path="res://ecran-interface-degat-4.png" id="18_6mpml"]
+[ext_resource type="Script" uid="uid://l7hq6hk14j3h" path="res://ui.gd" id="18_xr3d5"]
+[ext_resource type="Texture2D" uid="uid://relr4g5xys6m" path="res://ecran-interface-degat-2.png" id="19_uw4jc"]
+[ext_resource type="Texture2D" uid="uid://bmd1j2ekotbad" path="res://ecran-interface-degat-3.png" id="20_cels2"]
+[ext_resource type="Texture2D" uid="uid://8ahwyx2y2yuf" path="res://ecran-interface-degat-1.png" id="21_adgig"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yqmem"]
 animations = [{
@@ -106,6 +112,45 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmkdn"]
 size = Vector2(53.3333, 36.6667)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_xr3d5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_a35v7")
+}],
+"loop": true,
+"name": &"chill",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 0.2,
+"texture": ExtResource("21_adgig")
+}, {
+"duration": 0.2,
+"texture": ExtResource("20_cels2")
+}, {
+"duration": 0.2,
+"texture": ExtResource("21_adgig")
+}, {
+"duration": 7.0,
+"texture": ExtResource("18_6mpml")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_cels2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_uw4jc")
+}],
+"loop": true,
+"name": &"oh_fuck",
+"speed": 2.0
+}]
+
 [node name="Spaceship" type="RigidBody2D"]
 contact_monitor = true
 max_contacts_reported = 1
@@ -143,3 +188,13 @@ scale = Vector2(1.8, 1.8)
 shape = SubResource("RectangleShape2D_pmkdn")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.7, 0.7)
+
+[node name="UI" type="AnimatedSprite2D" parent="."]
+z_index = 10
+position = Vector2(-0.333314, -0.499978)
+scale = Vector2(0.952778, 0.952778)
+sprite_frames = SubResource("SpriteFrames_xr3d5")
+animation = &"dead"
+speed_scale = 0.9
+script = ExtResource("18_xr3d5")

@@ -12,6 +12,7 @@ extends RigidBody2D
 # --- Animation Node ---
 @onready var animated_sprite: AnimatedSprite2D = $Ship
 @onready var animated_thruster: AnimatedSprite2D = $Fire
+@onready var animated_ui: AnimatedSprite2D = $UI
 
 # --- Private Variables ---
 var planets: Array = []
@@ -20,6 +21,8 @@ enum LandingStates {CLEAN, NOSE, SIDE}
 enum States {FLYING, LANDING, LANDED, TAKE_OFF, DEAD}
 var state: States = States.FLYING
 var landing_states: LandingStates = LandingStates.CLEAN
+
+var warning: bool = false
 
 var takeoff_distance = 50
 var takeoff_direction: Vector2
@@ -77,6 +80,10 @@ func _physics_process(delta: float) -> void:
 	if state != old_state:
 		print("New state:", States.keys()[state])
 		old_state = state
+	if warning:
+		animated_ui.play("oh_fuck")
+	else:
+		animated_ui.play("chill")
 
 
 func planet_touchdown(body):
@@ -106,6 +113,7 @@ func planet_touchdown(body):
 func death_animation() -> void:
 	state = States.DEAD
 	animated_sprite.play("death")
+	animated_ui.play("dead")
 	animated_sprite.connect("animation_finished", _on_death_animation_finished)
 	
 	print("💥 KABOOM!")
@@ -159,7 +167,6 @@ func taking_off(delta):
 		apply_central_impulse(takeoff_direction * launch_power)
 
 
-
 func apply_central_gravity(force: Vector2) -> void:
 	apply_central_force(force)
 
@@ -188,3 +195,5 @@ func handle_player_input():
 		if animated_sprite.animation != "idle":
 			animated_sprite.play("idle")
 			animated_thruster.hide()
+			
+			

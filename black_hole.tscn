@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dowglo4uriad"]
+[gd_scene load_steps=29 format=3 uid="uid://dowglo4uriad"]
 
 [ext_resource type="Script" uid="uid://brkrqvq44686g" path="res://black_hole.gd" id="1_sjfy6"]
 [ext_resource type="Texture2D" uid="uid://b3kgu5o13st5p" path="res://trounoir-frame-1.png" id="2_6528t"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://c12deqh1vlnfr" path="res://trounoir-frame-10.png" id="11_7bm11"]
 [ext_resource type="Texture2D" uid="uid://b8okdoc3vpjlq" path="res://trounoir-frame-11.png" id="12_8ngfd"]
 [ext_resource type="Texture2D" uid="uid://cempjiv3gqkj1" path="res://trounoir-frame-12.png" id="13_k6pqh"]
+[ext_resource type="Script" uid="uid://dg0u3d07mtfaw" path="res://danger_zone.gd" id="23_8ngfd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q56d7"]
 size = Vector2(50, 100000)
@@ -113,6 +114,9 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k6pqh"]
+size = Vector2(2501, 2000)
+
 [node name="Black Hole" type="Area2D"]
 script = ExtResource("1_sjfy6")
 
@@ -159,3 +163,13 @@ scale = Vector2(0.90405, 0.90405)
 sprite_frames = SubResource("SpriteFrames_q5a1m")
 frame_progress = 0.726347
 speed_scale = 0.3
+
+[node name="DangerZone" type="Area2D" parent="."]
+script = ExtResource("23_8ngfd")
+
+[node name="Warning" type="CollisionShape2D" parent="DangerZone"]
+position = Vector2(-518.5, 0)
+shape = SubResource("RectangleShape2D_k6pqh")
+
+[connection signal="body_entered" from="DangerZone" to="DangerZone" method="_on_body_entered"]
+[connection signal="body_exited" from="DangerZone" to="DangerZone" method="_on_body_exited"]
