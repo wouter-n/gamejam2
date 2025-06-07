@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ci27c1ie520gm"]
+[gd_scene load_steps=5 format=3 uid="uid://ci27c1ie520gm"]
 
 [ext_resource type="Script" uid="uid://pbqvg3utmln" path="res://level.gd" id="1_oi3di"]
 [ext_resource type="PackedScene" uid="uid://blctv81qx0urh" path="res://planet.tscn" id="1_vonw3"]
 [ext_resource type="PackedScene" uid="uid://ble0en3an7434" path="res://spaceship.tscn" id="2_oi3di"]
+[ext_resource type="Texture2D" uid="uid://c0ct08hf8g6jw" path="res://fond-espace.png" id="4_0b4ue"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_oi3di")
@@ -21,3 +22,17 @@ position = Vector2(1483, -276)
 
 [node name="Planet4" parent="." instance=ExtResource("1_vonw3")]
 position = Vector2(264, 1236)
+
+[node name="Starfield" type="ParallaxBackground" parent="."]
+
+[node name="Parallax2D" type="Parallax2D" parent="Starfield"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Starfield/Parallax2D"]
+position = Vector2(2635, 340)
+scale = Vector2(1.75129, 1.75129)
+texture = ExtResource("4_0b4ue")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Starfield/Parallax2D"]
+position = Vector2(-835, 343)
+scale = Vector2(1.75129, 1.75129)
+texture = ExtResource("4_0b4ue")

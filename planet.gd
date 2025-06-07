@@ -24,8 +24,8 @@ func _ready():
 	
 	# Add different rotation speeds
 	rotation_speed = random_number(0.5, 2)
-	gravity_strength = random_number(100, 200)
-	gravity_range_multiplier = random_number(7.0, 8.0)
+	gravity_strength = random_number(100, 170)
+	gravity_range_multiplier = random_number(4.0, 7.0)
 	
 	# Make the planets different sizes
 	var scale_factor = random_number(0.5 , 3)

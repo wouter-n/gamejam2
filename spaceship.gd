@@ -7,11 +7,10 @@ extends RigidBody2D
 @export var thrust_force: float = 500.0
 @export var rotation_velocity: float = 6.0
 @export var braking_dampening: float = 2.0
-@export var launch_impulse: float = 300
+@export var launch_impulse: float = 500.0
 
 # --- Private Variables ---
 var planets: Array = []
-var HP: int = 3
 
 enum LandingStates {CLEAN, NOSE, SIDE}
 enum States {FLYING, LANDING, LANDED, TAKE_OFF}
@@ -73,8 +72,11 @@ func _physics_process(delta: float) -> void:
 		handle_player_input()
 	elif state == States.LANDED:
 		# Move with the planet
-		global_transform = landed_planet.global_transform * offset
-		handle_take_off()
+		if Input.is_action_just_pressed("ui_accept"):
+			handle_take_off()
+		else:
+			global_transform = landed_planet.global_transform * offset
+		#handle_take_off()
 
 	# For debugging
 	if state != old_state:
@@ -116,10 +118,11 @@ func short_angle_distance(a, b):
 
 func handle_take_off():
 	if Input.is_action_just_pressed("ui_accept") and landed_planet != null:
-		state = States.TAKE_OFF
-		var launch_direction = (global_position - landed_planet.global_position).normalized()
-		if launch_direction == Vector2.ZERO:
-			launch_direction = Vector2.UP
+		state = States.FLYING
+		#var launch_direction = (global_position - landed_planet.global_position).normalized()
+		var launch_direction = transform.x.normalized()
+		#if launch_direction == Vector2.ZERO:
+			#launch_direction = transform.x.normalized()
 		
 		apply_central_impulse(launch_direction * launch_impulse)
 
