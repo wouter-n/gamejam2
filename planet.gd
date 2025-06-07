@@ -3,29 +3,33 @@
 # This script holds the gravity value and now also handles the planet's rotation.
 extends StaticBody2D
 
-# This is our simplified "gravitational mass". Higher values mean stronger gravity.
-@export var gravity_strength: float = 100.0
 # This controls the speed of the planet's rotation in radians per second.
 # A positive value spins it counter-clockwise, a negative value clockwise.
 @export var rotation_speed: float = 0.4
-# This is how far beyond the planet scale the gravity extends
-@export var gravity_range_multiplier: float = 3.0
+
+var gravity_node: Node2D
+var gravity_offset: Vector2
 
 var rng = RandomNumberGenerator.new()
 
+const SPACESHIP_MASS = 10
+const GRAVITY_CONSTANT: float = 250.0
+const MASS_PER_RADIUS_PIXEL: float = 100.0
+
 var radius: float
+var mass: float
+
 
 func _ready():
-	# Add this node to the "planets" group when the scene starts.
-	# This allows the spaceship to easily find it without a direct node path.
-	add_to_group("planets")
-	
+	# Initialize random number generator
 	rng.randomize()
 	
-	# Add different rotation speeds
-	rotation_speed = random_number(0.5, 2)
-	gravity_strength = random_number(100, 170)
-	gravity_range_multiplier = random_number(4.0, 7.0)
+	# Set the gravity node
+	gravity_node = $GravityArea
+	
+		# Add different rotation speeds and direction
+	rotation_speed = random_number(0.5, 3) * random_direction()
+	
 	
 	# Make the planets different sizes
 	var scale_factor = random_number(0.5 , 3)
@@ -33,36 +37,50 @@ func _ready():
 	
 	# Change the scale of the children too
 	for child in self.get_children():
-		#if child.name != "GravityArea":
-			child.scale *= scale_factor
+		child.scale *= scale_factor
 	
 	# Get the radius for ease of calculations with the spaceship
 	var collision_surface = self.get_node("PlanetSurface") as CollisionShape2D
+	
 	radius = collision_surface.shape.radius * global_scale.x
+	mass = radius * MASS_PER_RADIUS_PIXEL
 	
-	gravity_strength *= scale_factor
-	var gravity_area = $GravityArea
-	var gravity_shape = gravity_area.get_node("CollisionShape2D").shape as CircleShape2D
-	gravity_shape.radius = radius * gravity_range_multiplier
-	
+	# Add this node to the "planets" group when the scene starts.
+	# This allows the spaceship to easily find it without a direct node path.
+	add_to_group("planets")
+
 
 func _physics_process(delta):
 	# Increment the node's rotation by the speed multiplied by delta.
 	# Using delta makes the rotation smooth and independent of the frame rate.
 	rotation += rotation_speed * delta
+	
+	# Keep the collision box from rotating
+	gravity_node.rotation -= rotation_speed * delta
+	
 	for body in $GravityArea.get_overlapping_bodies():
 		if not body is RigidBody2D:
 			continue
-		var direction = (global_position - body.global_position).normalized()
-		body.apply_central_gravity(direction * gravity_strength)
+		
+		var vector_to_spaceship = (global_position - body.global_position)
+		body.apply_central_gravity(get_gravity_force(vector_to_spaceship))
+
+
+func get_gravity_force(vector_to_spaceship: Vector2):
+	var distance_to_spaceship = vector_to_spaceship.length()
+	var direction_to_spaceship = vector_to_spaceship.normalized()
+	
+	var gravity_force = (GRAVITY_CONSTANT * SPACESHIP_MASS * mass) / (distance_to_spaceship ** 2)	
+	return gravity_force * direction_to_spaceship
 
 
 func random_number(low, high):
 	return rng.randf_range(low, high)
 	
-func _draw():
-	var gravity_area_radius = radius * gravity_range_multiplier
-	draw_circle(Vector2.ZERO, gravity_area_radius, Color(0.2, 0.6, 1.0, 0.3))  # Light blue, semi-transparent
-
-func _process(delta):
-	queue_redraw()  # Make sure the draw updates every frame in the editor too
+	
+func random_direction():
+	var random_direction = rng.randi_range(-1, 0)
+	if random_direction == 0:
+		random_direction = 1
+	
+	return random_direction
