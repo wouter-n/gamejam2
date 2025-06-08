@@ -163,7 +163,9 @@ func death_animation() -> void:
 func _on_death_animation_finished() -> void:
 	# Function is called after the death animation is finished
 	hide()
-	get_tree().reload_current_scene()
+	
+	Utilities.score = score
+	Utilities.switch_scene("GameOver", self)
 
 
 func distance_to_closest_planet():

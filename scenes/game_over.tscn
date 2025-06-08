@@ -1,0 +1,112 @@
+[gd_scene load_steps=4 format=3 uid="uid://bquh2sx3dt4ij"]
+
+[ext_resource type="Script" uid="uid://1jjbkffncfq" path="res://scripts/game_over.gd" id="1_tbwuq"]
+[ext_resource type="Theme" uid="uid://cb2tqos08yhkd" path="res://assets/MinimalUI/MinimalUI.tres" id="3_5mrt3"]
+[ext_resource type="FontFile" uid="uid://buoc0v8eewdxm" path="res://assets/Exo2-VariableFont_wght.ttf" id="3_rwowx"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_tbwuq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1282.0
+offset_bottom = 723.0
+color = Color(0, 0, 0, 1)
+
+[node name="Labels" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 632.0
+offset_top = 367.0
+offset_right = 632.0
+offset_bottom = 367.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_5mrt3")
+
+[node name="Game Over" type="Label" parent="Labels"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -279.0
+offset_top = -280.0
+offset_right = 279.0
+offset_bottom = -159.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_rwowx")
+theme_override_font_sizes/font_size = 100
+text = "Game Over..."
+horizontal_alignment = 1
+
+[node name="Loser" type="Label" parent="Labels"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -589.0
+offset_top = -121.0
+offset_right = 589.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_rwowx")
+theme_override_font_sizes/font_size = 60
+text = "Score : $player_score"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_5mrt3")
+
+[node name="GameOverMenu" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 524.0
+offset_top = 417.0
+offset_right = 678.0
+offset_bottom = 510.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Retry" type="Button" parent="Panel/GameOverMenu"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_neighbor_top = NodePath("../MainMenu")
+theme = ExtResource("3_5mrt3")
+theme_override_fonts/font = ExtResource("3_rwowx")
+theme_override_font_sizes/font_size = 30
+text = "Retry"
+
+[node name="MainMenu" type="Button" parent="Panel/GameOverMenu"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../Retry")
+theme = ExtResource("3_5mrt3")
+theme_override_fonts/font = ExtResource("3_rwowx")
+theme_override_font_sizes/font_size = 30
+text = "Main Menu
+"
+
+[connection signal="pressed" from="Panel/GameOverMenu/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="Panel/GameOverMenu/MainMenu" to="." method="_on_main_menu_pressed"]

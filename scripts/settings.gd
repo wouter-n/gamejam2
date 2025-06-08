@@ -27,7 +27,3 @@ func _on_back_pressed():
 	if pre_scene:
 		pre_scene.reset_focus()
 	AudioManager.play_button_sound()
-
-
-func _on_option_pressed() -> void:
-	pass # Replace with function body.
