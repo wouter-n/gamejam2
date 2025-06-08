@@ -1,7 +1,2 @@
-res://scenes/audio_manager.tscn
+res://scenes/boot_splash_scene.tscn
 res://assets/MinimalUI/MinimalUI.tres
-res://level.tscn
-res://scenes/main_menu.tscn
-res://planet.tscn
-res://spaceship.gd
-res://scripts/settings.gd
