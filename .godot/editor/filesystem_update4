@@ -1,3 +1,6 @@
-res://scenes/boot_splash_scene.tscn
+res://spaceship.tscn
 res://assets/MinimalUI/MinimalUI.tres
-res://scenes/main_menu.tscn
+res://spaceship.gd
+res://scenes/audio_manager.tscn
+res://scripts/audio_manager.gd
+res://default_bus_layout.tres

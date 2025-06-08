@@ -4,6 +4,11 @@ extends Node
 @onready var in_menu_music: AudioStreamPlayer = $in_menu_music
 @onready var sound_player: AudioStreamPlayer = $SoundPlayer
 
+
+@onready var death_sound: AudioStreamPlayer = $Death
+@onready var takeoff_sound: AudioStreamPlayer = $Takeoff
+
+
 func _ready():
 	pass # Replace with function body.
 
@@ -20,7 +25,14 @@ func stop_music():
 	if in_game_music and is_instance_valid(in_game_music):
 		if in_game_music.playing:
 			in_game_music.stop()
-			
+
 	if in_menu_music and is_instance_valid(in_game_music):
 		if in_menu_music.playing:
 			in_menu_music.stop()
+			
+			
+func play_death_sound():
+	death_sound.play()
+
+func play_takeoff_sound():
+	takeoff_sound.play()

@@ -14,6 +14,8 @@ extends RigidBody2D
 @onready var animated_thruster: AnimatedSprite2D = $Fire
 @onready var animated_ui: AnimatedSprite2D = $UI
 
+@onready var death_sound: AudioStreamPlayer = $Death
+
 # --- Score ---
 @onready var score_label = $UI/Label
 @onready var score: float = 0
@@ -106,6 +108,7 @@ func _physics_process(delta: float) -> void:
 	
 		if Input.is_action_just_pressed("Launch"):
 			taking_off(delta)
+			AudioManager.play_takeoff_sound()
 			#animated_thruster.hide()
 		else:
 			if landed_planet == null:
@@ -152,6 +155,7 @@ func planet_touchdown(body):
 func death_animation() -> void:
 	state = States.DEAD
 	animated_sprite.play("death")
+	AudioManager.play_death_sound()
 	animated_ui.play("dead")
 	animated_sprite.connect("animation_finished", _on_death_animation_finished)
 	
@@ -236,10 +240,10 @@ func handle_player_input():
 			animated_sprite.play("thrust")
 			animated_thruster.show()
 			animated_thruster.play("fire")
+		# AudioManager.play_thruster_sound()
 	else:
 		$"Fire/GPUParticles2D".emitting = false
 		if animated_sprite.animation != "idle":
 			animated_sprite.play("idle")
 			animated_thruster.hide()
-			
-			
+	
