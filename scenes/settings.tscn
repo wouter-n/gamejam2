@@ -296,6 +296,7 @@ theme_override_constants/separation = 50
 layout_mode = 2
 focus_neighbor_top = NodePath("../Up")
 focus_neighbor_bottom = NodePath("../Left")
+action = "Launch"
 
 [node name="Back" type="Button" parent="Controls"]
 custom_minimum_size = Vector2(100, 0)

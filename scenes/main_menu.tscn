@@ -73,7 +73,7 @@ motion_mirroring = Vector2(2000, 0)
 [node name="Nebula1" type="Sprite2D" parent="ParallaxBackground/Nebulas1Parallax"]
 texture_filter = 1
 position = Vector2(-110, -110)
-scale = Vector2(0.775229, 0.606147)
+scale = Vector2(0.942661, 0.737061)
 texture = ExtResource("2_a8gd2")
 centered = false
 
@@ -94,8 +94,8 @@ motion_mirroring = Vector2(2000, 0)
 
 [node name="Nebula3" type="Sprite2D" parent="ParallaxBackground/Nebulas3Parallax"]
 texture_filter = 1
-position = Vector2(813, 180)
-scale = Vector2(1.0711, 0.837488)
+position = Vector2(503, -62.3871)
+scale = Vector2(1.42661, 1.11545)
 texture = ExtResource("4_8egab")
 centered = false
 
