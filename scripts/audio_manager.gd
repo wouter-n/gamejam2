@@ -1,6 +1,7 @@
 extends Node
 
-@onready var music_player: AudioStreamPlayer = $MusicPlayer
+@onready var in_game_music: AudioStreamPlayer = $in_game_music
+@onready var in_menu_music: AudioStreamPlayer = $in_menu_music
 @onready var sound_player: AudioStreamPlayer = $SoundPlayer
 
 func _ready():
@@ -8,6 +9,18 @@ func _ready():
 
 func play_button_sound():
 	sound_player.play()
+	
+func in_game_music_play():
+	in_game_music.play()
 
-func play_music_sound():
-	music_player.play()
+func in_menu_music_play():
+	in_menu_music.play()
+
+func stop_music():
+	if in_game_music and is_instance_valid(in_game_music):
+		if in_game_music.playing:
+			in_game_music.stop()
+			
+	if in_menu_music and is_instance_valid(in_game_music):
+		if in_menu_music.playing:
+			in_menu_music.stop()

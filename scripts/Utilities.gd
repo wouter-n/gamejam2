@@ -54,6 +54,8 @@ func switch_scene(scene_name: StringName, cur_scene: Node):
 	Engine.time_scale = 1
 	get_tree().paused = false
 
+	AudioManager.stop_music()
+
 	# Supprimer la current_scene si elle existe
 	if get_tree().current_scene and get_tree().current_scene != cur_scene:
 		get_tree().current_scene.queue_free()

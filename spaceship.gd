@@ -66,7 +66,7 @@ func _physics_process(delta: float) -> void:
 	elif state == States.LANDED:
 		animated_sprite.play("land")
 	
-		if Input.is_action_just_pressed("ui_accept"):
+		if Input.is_action_just_pressed("uiLaunch_accept"):
 			taking_off(delta)
 			#animated_thruster.hide()
 		else:
