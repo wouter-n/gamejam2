@@ -1,0 +1,11 @@
+AnimatedSprite2D
+Label
+Area2D
+CollisionShape2D
+Timer
+TextureRect
+Control
+Sprite2D
+WorldEnvironment
+GPUParticles2D
+Parallax2D

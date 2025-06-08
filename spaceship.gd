@@ -14,6 +14,28 @@ extends RigidBody2D
 @onready var animated_thruster: AnimatedSprite2D = $Fire
 @onready var animated_ui: AnimatedSprite2D = $UI
 
+# --- Score ---
+@onready var score_label = $UI/Label
+@onready var score: float = 0
+
+# --- Fuel  ---
+@onready var fuel_gauge = $UI/FuelGauge
+var fuel_in_tank: bool = true
+var fuel: float = 100
+
+func _make_fuel_map() -> Dictionary:
+	var fuel_map: Dictionary = {}
+	var frame = 0
+	for i in range(100, -10, -10):
+		fuel_map[i] = frame
+		frame += 1
+	return fuel_map
+var fuel_map: Dictionary = _make_fuel_map()
+
+const THRUST_COST: float = 0.5
+const ROTATE_COST: float = 0.1
+const TAKE_OFF_COST: float = 1
+
 # --- Private Variables ---
 var planets: Array = []
 
@@ -32,6 +54,20 @@ var offset : Transform2D
 
 var old_state = States.FLYING
 
+func _update_fuel() -> void:
+	var clamped_fuel = int(fuel / 10) * 10
+	clamped_fuel = clamp(clamped_fuel, 0, 100)
+	var frame = fuel_map[clamped_fuel]
+	fuel_gauge.frame = frame
+	if clamped_fuel == 0 or fuel_gauge.frame == 9:
+		fuel_in_tank = false
+		animated_sprite.play("idle")
+		animated_thruster.hide()
+	elif fuel < 30:
+		warning = true
+	else:
+		warning = false
+		fuel_in_tank = true
 
 func _ready():
 	planets = get_tree().get_nodes_in_group("planets")
@@ -42,8 +78,10 @@ func _ready():
 	animated_sprite.play("idle")
 	animated_thruster.hide()
 
-
 func _physics_process(delta: float) -> void:
+	score += 1
+	score_label.text = "%d" % score
+	_update_fuel()
 	if state == States.DEAD:
 		# Do nothing
 		pass
@@ -91,6 +129,7 @@ func planet_touchdown(body):
 		var planet = body
 		state = States.LANDED
 		landed_planet = planet
+		fuel = 100
 		
 		# Set to idle animation upon landing
 		animated_sprite.play("idle")
@@ -165,6 +204,7 @@ func taking_off(delta):
 		
 		angular_velocity = 0
 		apply_central_impulse(takeoff_direction * launch_power)
+		fuel -= TAKE_OFF_COST
 
 
 func apply_central_gravity(force: Vector2) -> void:
@@ -173,14 +213,20 @@ func apply_central_gravity(force: Vector2) -> void:
 
 func handle_player_input():
 	var rotation_direction = 0
+	if not fuel_in_tank:
+		$"Fire/GPUParticles2D".emitting = false
+		return
 	if Input.is_action_pressed("Left"):
 		rotation_direction -= 1
+		fuel -= ROTATE_COST
 	if Input.is_action_pressed("Right"):
 		rotation_direction += 1
+		fuel -= ROTATE_COST
 	
 	angular_velocity = rotation_direction * rotation_velocity
 
 	if Input.is_action_pressed("Up"):
+		fuel -= THRUST_COST
 		if !$"Fire/GPUParticles2D".emitting:
 			$"Fire/GPUParticles2D".restart()
 		$"Fire/GPUParticles2D".emitting = true
