@@ -53,9 +53,21 @@ func load_video_settings():
 func switch_scene(scene_name: StringName, cur_scene: Node):
 	Engine.time_scale = 1
 	get_tree().paused = false
+
+	# Supprimer la current_scene si elle existe
+	if get_tree().current_scene and get_tree().current_scene != cur_scene:
+		get_tree().current_scene.queue_free()
+
+	# Instancier la nouvelle scène
 	var scene = scenes[scene_map[scene_name]].instantiate()
 	get_tree().root.add_child(scene)
-	cur_scene.queue_free()
+
+	# Définir la nouvelle scène comme current_scene
+	get_tree().current_scene = scene
+
+	# Libérer la scène actuelle si ce n’est pas la même
+	if cur_scene and cur_scene != get_tree().current_scene:
+		cur_scene.queue_free()
 
 func hide_scene(scene):
 	scene.hide()

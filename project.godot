@@ -13,6 +13,9 @@ config_version=5
 config/name="Planetes"
 run/main_scene="uid://xqntvyuo85wg"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
 
 [autoload]
@@ -24,6 +27,7 @@ AudioManager="*res://scenes/audio_manager.tscn"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/stretch/mode="viewport"
 
 [input]
 

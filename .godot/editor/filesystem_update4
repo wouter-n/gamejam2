@@ -1,6 +1,5 @@
-res://scenes/utilities.tscn
-res://assets/MinimalUI/MinimalUI.tres
 res://level.tscn
+res://assets/MinimalUI/MinimalUI.tres
 res://spaceship.tscn
 res://black_hole.tscn
 res://planet.tscn
@@ -8,8 +7,9 @@ res://tutorial.tscn
 res://scenes/sample_game.tscn
 res://scenes/boot_splash_scene.tscn
 res://scenes/main_menu.tscn
-res://scripts/main_menu.gd
-res://scripts/settings.gd
-res://level.gd
-res://spaceship.gd
+res://scenes/utilities.tscn
 res://tutorial.gd
+res://scenes/settings.tscn
+res://scripts/Utilities.gd
+res://scenes/audio_manager.tscn
+res://scenes/action_button.tscn
