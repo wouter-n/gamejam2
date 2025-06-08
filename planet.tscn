@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://blctv81qx0urh"]
+[gd_scene load_steps=12 format=3 uid="uid://blctv81qx0urh"]
 
 [ext_resource type="Script" uid="uid://bmj8uosuu8ihe" path="res://planet.gd" id="1_1odxm"]
 [ext_resource type="Texture2D" uid="uid://hftkx0c03aro" path="res://planet1.png" id="2_mtr83"]
 [ext_resource type="Texture2D" uid="uid://c50pms6cllq7u" path="res://planet2.png" id="3_x6khl"]
 [ext_resource type="Texture2D" uid="uid://dvu8k7nc1fge6" path="res://planet3.png" id="4_x32po"]
 [ext_resource type="Texture2D" uid="uid://07ob5gbfflw1" path="res://atmosphere3.png" id="5_x32po"]
+[ext_resource type="Texture2D" uid="uid://w18nvp3b4ha7" path="res://planetes-destruct-1.png" id="6_26qf8"]
+[ext_resource type="Texture2D" uid="uid://bomiypo8ep3h1" path="res://planetes-destruct-2.png" id="7_hs5tw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mtr83"]
 radius = 400.061
@@ -14,6 +16,20 @@ blend_mode = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a75xc"]
 radius = 126.004
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cit8o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_26qf8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_hs5tw")
+}],
+"loop": false,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="Planet" type="AnimatableBody2D" groups=["planets"]]
 script = ExtResource("1_1odxm")
@@ -40,3 +56,7 @@ texture = ExtResource("2_mtr83")
 [node name="PlanetSurface" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("CircleShape2D_a75xc")
+
+[node name="Death" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.334, 0.334)
+sprite_frames = SubResource("SpriteFrames_cit8o")

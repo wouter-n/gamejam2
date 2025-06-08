@@ -1,2 +1,5 @@
 res://spaceship.tscn
 res://assets/MinimalUI/MinimalUI.tres
+res://black_hole.gd
+res://planet.gd
+res://planet.tscn
