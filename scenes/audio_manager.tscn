@@ -1,14 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://6mdjrm773v5g"]
+[gd_scene load_steps=5 format=3 uid="uid://6mdjrm773v5g"]
 
 [ext_resource type="Script" uid="uid://b5t5jbmy6qf5x" path="res://scripts/audio_manager.gd" id="1_dnwig"]
-[ext_resource type="AudioStream" uid="uid://dcx8as0gnae1p" path="res://assets/audio/Gravit-Fuyante--coutez-la-musique-IA-MP3--SunoAI_accompaniment.wav" id="2_3asnw"]
+[ext_resource type="AudioStream" uid="uid://dwvf2lm4ymgmf" path="res://assets/audio/in_game1.mp3" id="2_3asnw"]
 [ext_resource type="AudioStream" uid="uid://cdftf0f0a87pp" path="res://assets/audio/Modern10.wav" id="3_f2okg"]
+[ext_resource type="AudioStream" uid="uid://bt12cu7qbpd4f" path="res://assets/audio/menu1.mp3" id="3_m6ggh"]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_dnwig")
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+[node name="in_game_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_3asnw")
+
+[node name="in_menu_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_m6ggh")
 
 [node name="SoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_f2okg")

@@ -1,11 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://dc388hkklqvvc"]
+[gd_scene load_steps=21 format=3 uid="uid://dc388hkklqvvc"]
 
 [ext_resource type="Theme" uid="uid://cb2tqos08yhkd" path="res://assets/MinimalUI/MinimalUI.tres" id="1_0ajpt"]
 [ext_resource type="Script" uid="uid://bydhmyj6yse10" path="res://scripts/parallax_bg.gd" id="1_8ln24"]
 [ext_resource type="Script" uid="uid://csqgynxfxun7d" path="res://scripts/main_menu.gd" id="1_tievw"]
 [ext_resource type="Texture2D" uid="uid://da1xwofjnl6n0" path="res://assets/images/title_stars.png" id="1_wu84c"]
+[ext_resource type="Texture2D" uid="uid://si4i7x028l2k" path="res://assets/images/title_nebula1.png" id="2_a8gd2"]
 [ext_resource type="PackedScene" uid="uid://603k3vy4p3f1" path="res://scenes/settings.tscn" id="3_dt7l5"]
-[ext_resource type="Texture2D" uid="uid://bdsm0wq21ksly" path="res://assets/images/title_nebula.png" id="3_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://dmrhaeradsvpu" path="res://assets/images/title_nebula2.png" id="3_hstxw"]
+[ext_resource type="Texture2D" uid="uid://cc1uxdy1n2spr" path="res://assets/images/title_nebula3.png" id="4_8egab"]
 [ext_resource type="Texture2D" uid="uid://cen0at3mtu2hl" path="res://assets/images/planet1.png" id="4_oa1go"]
 [ext_resource type="Texture2D" uid="uid://c3ebrp7b0o1yw" path="res://assets/images/planet2.png" id="5_jk1qb"]
 [ext_resource type="Texture2D" uid="uid://c4ehgmvr03qy4" path="res://assets/images/planet3.png" id="6_5dd4i"]
@@ -64,15 +66,37 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="NebulasParallax" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="Nebulas1Parallax" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.07, 0.07)
 motion_mirroring = Vector2(2000, 0)
 
-[node name="Nebulas" type="Sprite2D" parent="ParallaxBackground/NebulasParallax"]
+[node name="Nebula1" type="Sprite2D" parent="ParallaxBackground/Nebulas1Parallax"]
 texture_filter = 1
-position = Vector2(-682, 6)
-scale = Vector2(0.492834, 0.385344)
-texture = ExtResource("3_rtw2f")
+position = Vector2(-110, -110)
+scale = Vector2(0.942661, 0.737061)
+texture = ExtResource("2_a8gd2")
+centered = false
+
+[node name="Nebulas2Parallax" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.07, 0.07)
+motion_mirroring = Vector2(2000, 0)
+
+[node name="Nebula2" type="Sprite2D" parent="ParallaxBackground/Nebulas2Parallax"]
+texture_filter = 1
+position = Vector2(-411, 361)
+scale = Vector2(0.775229, 0.606147)
+texture = ExtResource("3_hstxw")
+centered = false
+
+[node name="Nebulas3Parallax" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.07, 0.07)
+motion_mirroring = Vector2(2000, 0)
+
+[node name="Nebula3" type="Sprite2D" parent="ParallaxBackground/Nebulas3Parallax"]
+texture_filter = 1
+position = Vector2(503, -62.3871)
+scale = Vector2(1.42661, 1.11545)
+texture = ExtResource("4_8egab")
 centered = false
 
 [node name="StarsParallax" type="ParallaxLayer" parent="ParallaxBackground"]

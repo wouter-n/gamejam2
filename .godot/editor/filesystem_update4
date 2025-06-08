@@ -1,5 +1,18 @@
 res://spaceship.tscn
 res://assets/MinimalUI/MinimalUI.tres
+<<<<<<< HEAD
+res://scenes/audio_manager.tscn
+res://scripts/Utilities.gd
+res://scripts/audio_manager.gd
+res://scripts/main_menu.gd
+res://level.tscn
+res://scenes/main_menu.tscn
+res://scenes/settings.tscn
+res://scripts/action_button.gd
+res://spaceship.gd
+res://scenes/utilities.tscn
+=======
 res://black_hole.gd
 res://planet.gd
 res://planet.tscn
+>>>>>>> master
