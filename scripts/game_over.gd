@@ -4,6 +4,7 @@ extends Control
 func _ready() -> void:
 	var score_label = $Labels/Loser
 	score_label.text = "Score: %d" % Utilities.score
+	AudioManager.game_over.play()
 
 func _on_retry_pressed() -> void:
 	Utilities.switch_scene("SampleGame", self)

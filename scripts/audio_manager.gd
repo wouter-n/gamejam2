@@ -7,6 +7,7 @@ extends Node
 
 @onready var death_sound: AudioStreamPlayer = $Death
 @onready var takeoff_sound: AudioStreamPlayer = $Takeoff
+@onready var game_over: AudioStreamPlayer = $GameOver
 
 
 func _ready():
@@ -36,3 +37,6 @@ func play_death_sound():
 
 func play_takeoff_sound():
 	takeoff_sound.play()
+
+func game_over_play():
+	game_over.play()

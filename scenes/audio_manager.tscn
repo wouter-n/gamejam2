@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://6mdjrm773v5g"]
+[gd_scene load_steps=8 format=3 uid="uid://6mdjrm773v5g"]
 
 [ext_resource type="Script" uid="uid://b5t5jbmy6qf5x" path="res://scripts/audio_manager.gd" id="1_dnwig"]
 [ext_resource type="AudioStream" uid="uid://dwvf2lm4ymgmf" path="res://assets/audio/in_game1.mp3" id="2_3asnw"]
 [ext_resource type="AudioStream" uid="uid://cdftf0f0a87pp" path="res://assets/audio/Modern10.wav" id="3_f2okg"]
 [ext_resource type="AudioStream" uid="uid://bt12cu7qbpd4f" path="res://assets/audio/menu1.mp3" id="3_m6ggh"]
 [ext_resource type="AudioStream" uid="uid://lrd5em4vlk1w" path="res://explosion3.wav" id="5_aoitu"]
+[ext_resource type="AudioStream" uid="uid://dwk5qv06ar63n" path="res://assets/audio/GameOver.wav" id="5_kq7b2"]
 [ext_resource type="AudioStream" uid="uid://fsu73n3yqwnh" path="res://takeoff.wav" id="6_njtn3"]
 
 [node name="AudioManager" type="Node"]
@@ -20,6 +21,9 @@ parameters/looping = true
 
 [node name="SoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_f2okg")
+
+[node name="GameOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_kq7b2")
 
 [node name="Death" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_aoitu")

@@ -5,3 +5,6 @@ res://scripts/settings.gd
 res://spaceship.gd
 res://spaceship.tscn
 res://scenes/game_over.tscn
+res://scripts/sample_game.gd
+res://scripts/audio_manager.gd
+res://scripts/game_over.gd
