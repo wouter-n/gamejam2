@@ -1,0 +1,11 @@
+res://spaceship.tscn
+res://assets/MinimalUI/MinimalUI.tres
+res://level.tscn
+res://spaceship.gd
+res://black_hole.tscn
+res://planet.tscn
+res://tutorial.tscn
+res://scenes/sample_game.tscn
+res://scenes/boot_splash_scene.tscn
+res://scenes/main_menu.tscn
+res://scenes/utilities.tscn

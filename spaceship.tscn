@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://ble0en3an7434"]
+[gd_scene load_steps=40 format=3 uid="uid://ble0en3an7434"]
 
 [ext_resource type="Script" uid="uid://bky6ng0nv1l1y" path="res://spaceship.gd" id="1_y3uy0"]
 [ext_resource type="Texture2D" uid="uid://b4ealxg2ifm71" path="res://vaisseaux_1-frame-1.png" id="2_gsmss"]
@@ -22,6 +22,16 @@
 [ext_resource type="Texture2D" uid="uid://relr4g5xys6m" path="res://ecran-interface-degat-2.png" id="19_uw4jc"]
 [ext_resource type="Texture2D" uid="uid://bmd1j2ekotbad" path="res://ecran-interface-degat-3.png" id="20_cels2"]
 [ext_resource type="Texture2D" uid="uid://8ahwyx2y2yuf" path="res://ecran-interface-degat-1.png" id="21_adgig"]
+[ext_resource type="Texture2D" uid="uid://3fq38dwkbujt" path="res://fuel_gauge/carburant-frame-1.png" id="23_7u3vf"]
+[ext_resource type="Texture2D" uid="uid://bta1apinl35gu" path="res://fuel_gauge/carburant-frame-2.png" id="24_od8rv"]
+[ext_resource type="Texture2D" uid="uid://d3vio1fpbscdf" path="res://fuel_gauge/carburant-frame-3.png" id="25_km8rt"]
+[ext_resource type="Texture2D" uid="uid://drt8h3e81gj6p" path="res://fuel_gauge/carburant-frame-4.png" id="26_of7wh"]
+[ext_resource type="Texture2D" uid="uid://bbqrkmg0u2wbs" path="res://fuel_gauge/carburant-frame-5.png" id="27_r60of"]
+[ext_resource type="Texture2D" uid="uid://b6l5dpbbxqy42" path="res://fuel_gauge/carburant-frame-6.png" id="28_aiew6"]
+[ext_resource type="Texture2D" uid="uid://dyds0huqkdscf" path="res://fuel_gauge/carburant-frame-7.png" id="29_7od73"]
+[ext_resource type="Texture2D" uid="uid://beu6vqbilhc03" path="res://fuel_gauge/carburant-frame-8.png" id="30_dkai2"]
+[ext_resource type="Texture2D" uid="uid://3oagy4ofk7df" path="res://fuel_gauge/carburant-frame-9.png" id="31_qa8yi"]
+[ext_resource type="Texture2D" uid="uid://bwcqb2rva2h32" path="res://fuel_gauge/carburant-frame-10.png" id="32_ulqta"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yqmem"]
 animations = [{
@@ -151,6 +161,47 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_04m72"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_7u3vf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_od8rv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_km8rt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_of7wh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_r60of")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_aiew6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_7od73")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_dkai2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_qa8yi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_ulqta")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7u3vf"]
+font_color = Color(0.986331, 0.818336, 0.81399, 1)
+
 [node name="Spaceship" type="RigidBody2D"]
 contact_monitor = true
 max_contacts_reported = 1
@@ -179,7 +230,7 @@ position = Vector2(-9.53674e-07, -9.53674e-07)
 rotation = 1.57079
 scale = Vector2(0.162827, 0.162827)
 sprite_frames = SubResource("SpriteFrames_bkiek")
-animation = &"death"
+animation = &"idle"
 speed_scale = 0.9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -195,6 +246,19 @@ z_index = 10
 position = Vector2(-0.333314, -0.499978)
 scale = Vector2(0.952778, 0.952778)
 sprite_frames = SubResource("SpriteFrames_xr3d5")
-animation = &"dead"
+animation = &"chill"
 speed_scale = 0.9
 script = ExtResource("18_xr3d5")
+
+[node name="FuelGauge" type="AnimatedSprite2D" parent="UI"]
+position = Vector2(-754.286, 408.805)
+sprite_frames = SubResource("SpriteFrames_04m72")
+frame_progress = 0.561501
+
+[node name="Label" type="Label" parent="UI"]
+offset_left = -77.3178
+offset_top = 462.332
+offset_right = -37.3178
+offset_bottom = 485.332
+scale = Vector2(4.59811, 2.69205)
+label_settings = SubResource("LabelSettings_7u3vf")
