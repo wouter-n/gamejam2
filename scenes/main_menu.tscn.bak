@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://dw6knjnr3ptid" path="res://assets/images/sprites/vaisseaux_feu-frame-1.png" id="11_hstxw"]
 [ext_resource type="Texture2D" uid="uid://b2431jgpb174i" path="res://assets/images/sprites/vaisseaux_feu-frame-2.png" id="12_8egab"]
 [ext_resource type="Texture2D" uid="uid://bjjoqmbkyq8v5" path="res://assets/images/station_r_logo.png" id="16_5pajh"]
-[ext_resource type="Texture2D" uid="uid://bqelao62064qx" path="res://assets/images/title_1.png" id="17_8egab"]
+[ext_resource type="Texture2D" uid="uid://bqelao62064qx" path="res://assets/images/title_1.png" id="16_hstxw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gw5y6"]
 animations = [{
@@ -58,10 +58,10 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("17_8egab")
+"texture": ExtResource("16_hstxw")
 }],
 "loop": true,
-"name": &"Title animation",
+"name": &"Title",
 "speed": 5.0
 }]
 
@@ -156,7 +156,7 @@ centered = false
 
 [node name="Ship" type="AnimatedSprite2D" parent="ParallaxBackground"]
 texture_filter = 1
-position = Vector2(749.4, 36.0008)
+position = Vector2(753.4, 0.000825882)
 rotation = 1.5708
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_gw5y6")
@@ -168,7 +168,7 @@ centered = false
 
 [node name="Flames" type="AnimatedSprite2D" parent="ParallaxBackground"]
 texture_filter = 1
-position = Vector2(600.2, 116.001)
+position = Vector2(604.2, 80.0008)
 rotation = 1.5708
 scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_svtp6")
@@ -184,10 +184,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -2.0
-offset_top = 57.0
-offset_right = -2.0
-offset_bottom = 57.0
+offset_left = -1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tievw")
@@ -207,14 +207,13 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Title" type="AnimatedSprite2D" parent="UI/MainMenu/VBoxContainer"]
-scale = Vector2(0.514134, 0.514134)
+scale = Vector2(0.492933, 0.492933)
 sprite_frames = SubResource("SpriteFrames_8egab")
-animation = &"Title animation"
-autoplay = "Title animation"
-frame_progress = 0.790723
+animation = &"Title"
+autoplay = "Title"
 centered = false
 
-[node name="space" type="Label" parent="UI/MainMenu/VBoxContainer"]
+[node name="Space" type="Label" parent="UI/MainMenu/VBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2

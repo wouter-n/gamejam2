@@ -10,9 +10,11 @@ script = ExtResource("1_dnwig")
 
 [node name="in_game_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_3asnw")
+parameters/looping = true
 
 [node name="in_menu_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_m6ggh")
+parameters/looping = true
 
 [node name="SoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_f2okg")
