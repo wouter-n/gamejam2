@@ -1,0 +1,238 @@
+[gd_scene load_steps=19 format=3 uid="uid://dc388hkklqvvc"]
+
+[ext_resource type="Theme" uid="uid://cb2tqos08yhkd" path="res://assets/MinimalUI/MinimalUI.tres" id="1_0ajpt"]
+[ext_resource type="Script" uid="uid://bydhmyj6yse10" path="res://scripts/parallax_bg.gd" id="1_8ln24"]
+[ext_resource type="Script" uid="uid://csqgynxfxun7d" path="res://scripts/main_menu.gd" id="1_tievw"]
+[ext_resource type="Texture2D" uid="uid://da1xwofjnl6n0" path="res://assets/images/title_stars.png" id="1_wu84c"]
+[ext_resource type="PackedScene" uid="uid://603k3vy4p3f1" path="res://scenes/settings.tscn" id="3_dt7l5"]
+[ext_resource type="Texture2D" uid="uid://bdsm0wq21ksly" path="res://assets/images/title_nebula.png" id="3_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://cen0at3mtu2hl" path="res://assets/images/planet1.png" id="4_oa1go"]
+[ext_resource type="Texture2D" uid="uid://c3ebrp7b0o1yw" path="res://assets/images/planet2.png" id="5_jk1qb"]
+[ext_resource type="Texture2D" uid="uid://c4ehgmvr03qy4" path="res://assets/images/planet3.png" id="6_5dd4i"]
+[ext_resource type="Texture2D" uid="uid://ctyk0jym634p3" path="res://assets/images/sprites/vaisseaux_1-frame-1.png" id="7_7b55j"]
+[ext_resource type="Texture2D" uid="uid://be60mcjhgja6e" path="res://assets/images/sprites/vaisseaux_1-frame-2.png" id="8_5pajh"]
+[ext_resource type="Texture2D" uid="uid://dqr2krlqdtykk" path="res://assets/images/sprites/vaisseaux_1-frame-3.png" id="9_j7ex8"]
+[ext_resource type="Texture2D" uid="uid://dmcrluhbghjjf" path="res://assets/images/sprites/vaisseaux_1-frame-4.png" id="10_a8gd2"]
+[ext_resource type="Texture2D" uid="uid://dw6knjnr3ptid" path="res://assets/images/sprites/vaisseaux_feu-frame-1.png" id="11_hstxw"]
+[ext_resource type="Texture2D" uid="uid://b2431jgpb174i" path="res://assets/images/sprites/vaisseaux_feu-frame-2.png" id="12_8egab"]
+[ext_resource type="Texture2D" uid="uid://bjjoqmbkyq8v5" path="res://assets/images/station_r_logo.png" id="16_5pajh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gw5y6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_7b55j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_5pajh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_j7ex8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_a8gd2")
+}],
+"loop": true,
+"name": &"Ship",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_svtp6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_hstxw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_8egab")
+}],
+"loop": true,
+"name": &"Flames",
+"speed": 5.0
+}]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_8ln24")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="NebulasParallax" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.07, 0.07)
+motion_mirroring = Vector2(2000, 0)
+
+[node name="Nebulas" type="Sprite2D" parent="ParallaxBackground/NebulasParallax"]
+texture_filter = 1
+position = Vector2(-682, 6)
+scale = Vector2(0.492834, 0.385344)
+texture = ExtResource("3_rtw2f")
+centered = false
+
+[node name="StarsParallax" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(1280, 0)
+
+[node name="Stars" type="Sprite2D" parent="ParallaxBackground/StarsParallax"]
+texture_filter = 1
+scale = Vector2(1.13216, 0.629688)
+texture = ExtResource("1_wu84c")
+centered = false
+
+[node name="Planet1Parallax" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(2000, 0)
+
+[node name="Planet1" type="Sprite2D" parent="ParallaxBackground/Planet1Parallax"]
+texture_filter = 1
+position = Vector2(-319, 462)
+scale = Vector2(0.3, 0.294)
+texture = ExtResource("5_jk1qb")
+centered = false
+
+[node name="Planet2Parallax" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.72, 0.72)
+motion_mirroring = Vector2(3500, 0)
+
+[node name="Planet2" type="Sprite2D" parent="ParallaxBackground/Planet2Parallax"]
+texture_filter = 1
+position = Vector2(-564, -99)
+scale = Vector2(0.642119, 0.612403)
+texture = ExtResource("6_5dd4i")
+centered = false
+
+[node name="Planet3Parallax" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(1.2, 1.2)
+motion_mirroring = Vector2(4000, 0)
+
+[node name="Planet3" type="Sprite2D" parent="ParallaxBackground/Planet3Parallax"]
+texture_filter = 1
+position = Vector2(2382, 309)
+scale = Vector2(1.16175, 1.09243)
+texture = ExtResource("4_oa1go")
+centered = false
+
+[node name="Ship" type="AnimatedSprite2D" parent="ParallaxBackground"]
+texture_filter = 1
+position = Vector2(757.2, 25)
+rotation = 1.5708
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_gw5y6")
+animation = &"Ship"
+frame = 2
+frame_progress = 0.334343
+speed_scale = 2.0
+centered = false
+
+[node name="Flames" type="AnimatedSprite2D" parent="ParallaxBackground"]
+texture_filter = 1
+position = Vector2(608, 105)
+rotation = 1.5708
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_svtp6")
+animation = &"Flames"
+frame_progress = 0.33682
+speed_scale = 2.0
+centered = false
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tievw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -318.0
+offset_top = -104.0
+offset_right = 318.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="UI/MainMenu/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("1_0ajpt")
+theme_override_colors/font_color = Color(1, 1, 1, 0.776471)
+theme_override_colors/font_shadow_color = Color(0.434647, 0.134798, 0.310188, 0.443137)
+theme_override_colors/font_outline_color = Color(0.806621, 1.2514e-06, 0.394415, 1)
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 30
+theme_override_font_sizes/font_size = 50
+text = "Orbit Dodge"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Start" type="Button" parent="UI/MainMenu/VBoxContainer"]
+custom_minimum_size = Vector2(100, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../Quit")
+focus_neighbor_bottom = NodePath("../Option")
+theme = ExtResource("1_0ajpt")
+theme_override_font_sizes/font_size = 24
+text = "Start"
+
+[node name="Option" type="Button" parent="UI/MainMenu/VBoxContainer"]
+custom_minimum_size = Vector2(100, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../Start")
+focus_neighbor_bottom = NodePath("../Quit")
+theme = ExtResource("1_0ajpt")
+theme_override_font_sizes/font_size = 24
+text = "Option"
+
+[node name="Quit" type="Button" parent="UI/MainMenu/VBoxContainer"]
+custom_minimum_size = Vector2(100, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../Option")
+focus_neighbor_bottom = NodePath("../Start")
+theme = ExtResource("1_0ajpt")
+theme_override_font_sizes/font_size = 24
+text = "Quit
+"
+
+[node name="Settings" parent="UI" node_paths=PackedStringArray("pre_scene") instance=ExtResource("3_dt7l5")]
+visible = false
+pre_scene = NodePath("../MainMenu")
+
+[node name="Station R" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(535, 629)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("16_5pajh")
+centered = false
+
+[connection signal="pressed" from="UI/MainMenu/VBoxContainer/Start" to="UI/MainMenu" method="_on_start_pressed"]
+[connection signal="pressed" from="UI/MainMenu/VBoxContainer/Option" to="UI/MainMenu" method="_on_option_pressed"]
+[connection signal="pressed" from="UI/MainMenu/VBoxContainer/Quit" to="UI/MainMenu" method="_on_quit_pressed"]
