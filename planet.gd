@@ -11,6 +11,7 @@ extends StaticBody2D
 # Allow to be used from the spaceship
 @export var radius: float
 
+@onready var animated_death: AnimatedSprite2D = $Death
 
 # --- CONSTANTS ---
 const SPACESHIP_MASS = 10
@@ -23,12 +24,9 @@ var mass: float
 
 
 func _ready():
-	# Initialize random number generator
 	rng.randomize()
-
-	# Add this node to the "planets" group when the scene starts.
-	# This allows the spaceship to easily find it without a direct node path.
 	add_to_group("planets")
+	animated_death.hide()
 
 func setup_random_features():
 	randomize()
@@ -97,3 +95,14 @@ func random_direction():
 		return -1
 	else:
 		return 1
+
+func planet_destroy():
+	$PlanetSurface.disabled = true
+	$PlanetSprite.hide()
+	set_physics_process(false)
+	animated_death.show()
+	animated_death.play("default")
+	animated_death.animation_finished.connect(_on_death_animation_finished)
+
+func _on_death_animation_finished():
+	queue_free()

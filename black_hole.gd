@@ -70,8 +70,10 @@ func _on_body_entered(body: Node2D) -> void:
 			_player.queue_free()
 	# If not the player, check if it belongs to the deletable group.
 	elif body.is_in_group(deletable_group_name):
-		body.queue_free() # Delete the node (e.g., the planet).
-
+		if body.has_method("planet_destroy"):
+			body.call("planet_destroy")
+		else:
+			body.queue_free()
 
 ## This function is called when another Area2D enters.
 func _on_area_entered(area: Area2D) -> void:
