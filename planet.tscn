@@ -1,12 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://blctv81qx0urh"]
+[gd_scene load_steps=15 format=3 uid="uid://blctv81qx0urh"]
 
 [ext_resource type="Script" uid="uid://bmj8uosuu8ihe" path="res://planet.gd" id="1_1odxm"]
 [ext_resource type="Texture2D" uid="uid://hftkx0c03aro" path="res://planet1.png" id="2_mtr83"]
 [ext_resource type="Texture2D" uid="uid://c50pms6cllq7u" path="res://planet2.png" id="3_x6khl"]
 [ext_resource type="Texture2D" uid="uid://dvu8k7nc1fge6" path="res://planet3.png" id="4_x32po"]
+[ext_resource type="Texture2D" uid="uid://cedbasru7n1by" path="res://planet4.png" id="5_p30nt"]
 [ext_resource type="Texture2D" uid="uid://07ob5gbfflw1" path="res://atmosphere3.png" id="5_x32po"]
 [ext_resource type="Texture2D" uid="uid://w18nvp3b4ha7" path="res://planetes-destruct-1.png" id="6_26qf8"]
+[ext_resource type="Texture2D" uid="uid://75hqx6yx6rt7" path="res://planet5.png" id="6_ndovs"]
 [ext_resource type="Texture2D" uid="uid://bomiypo8ep3h1" path="res://planetes-destruct-2.png" id="7_hs5tw"]
+[ext_resource type="Texture2D" uid="uid://dic62o7bbm1o8" path="res://planet6.png" id="7_j8jks"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mtr83"]
 radius = 400.061
@@ -32,8 +35,9 @@ animations = [{
 }]
 
 [node name="Planet" type="AnimatableBody2D" groups=["planets"]]
+position = Vector2(-1351, -170)
 script = ExtResource("1_1odxm")
-textures = Array[Texture]([ExtResource("2_mtr83"), ExtResource("3_x6khl"), ExtResource("4_x32po")])
+textures = Array[Texture]([ExtResource("2_mtr83"), ExtResource("3_x6khl"), ExtResource("4_x32po"), ExtResource("5_p30nt"), ExtResource("6_ndovs"), ExtResource("7_j8jks")])
 
 [node name="GravityArea" type="Area2D" parent="."]
 
@@ -54,7 +58,6 @@ scale = Vector2(0.34018, 0.34018)
 texture = ExtResource("2_mtr83")
 
 [node name="PlanetSurface" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_a75xc")
 
 [node name="Death" type="AnimatedSprite2D" parent="."]
