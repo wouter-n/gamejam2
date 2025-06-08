@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://x8khrexoscpv"]
+[gd_scene load_steps=5 format=3 uid="uid://x8khrexoscpv"]
 
 [ext_resource type="Script" uid="uid://dy21ebnrbcpxk" path="res://scripts/Utilities.gd" id="1_1a5s3"]
 [ext_resource type="PackedScene" uid="uid://dc388hkklqvvc" path="res://scenes/main_menu.tscn" id="2_2wsm8"]
 [ext_resource type="PackedScene" uid="uid://wpb5quy71p0p" path="res://tutorial.tscn" id="2_c35pf"]
+[ext_resource type="PackedScene" uid="uid://bquh2sx3dt4ij" path="res://scenes/game_over.tscn" id="4_3etoy"]
 
 [node name="Utilities" type="Node"]
 script = ExtResource("1_1a5s3")
-scenes = Array[PackedScene]([ExtResource("2_c35pf"), ExtResource("2_2wsm8")])
+scenes = Array[PackedScene]([ExtResource("2_c35pf"), ExtResource("2_2wsm8"), ExtResource("4_3etoy")])
 scene_map = {
+"GameOver": 2,
 "MainMenu": 1,
 "SampleGame": 0
 }

@@ -1,6 +1,7 @@
-res://spaceship.tscn
-res://assets/MinimalUI/MinimalUI.tres
-res://spaceship.gd
 res://scenes/audio_manager.tscn
-res://scripts/audio_manager.gd
-res://default_bus_layout.tres
+res://assets/MinimalUI/MinimalUI.tres
+res://scripts/Utilities.gd
+res://scripts/settings.gd
+res://spaceship.gd
+res://spaceship.tscn
+res://scenes/game_over.tscn

@@ -4,6 +4,7 @@ extends Node
 @export var scenes: Array[PackedScene] = []
 @export var scene_map: Dictionary = {}
 @export var is_persistence: bool = false
+@export var score = 0.0
 
 const PATH = "user://settings.cfg"
 var config: ConfigFile

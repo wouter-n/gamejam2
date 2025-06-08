@@ -56,3 +56,7 @@ func _on_option_pressed():
 
 func _on_main_menu_pressed():
 	Utilities.switch_scene("MainMenu", self)
+
+
+func _on_retry_pressed() -> void:
+	pass # Replace with function body.
